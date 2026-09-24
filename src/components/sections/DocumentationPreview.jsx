@@ -1,34 +1,36 @@
+import { Link } from '../../router/index.jsx'
+
 export function DocumentationPreview() {
   const docGuides = [
     {
       title: 'Installation',
       desc: 'Set up React 18, Vite, and the Firebase JavaScript SDK in minutes.',
-      href: '#dx'
+      href: '/docs/getting-started'
     },
     {
       title: 'Firebase Setup',
       desc: 'Configure environment variables using the provided .env.example template.',
-      href: '#dx'
+      href: '/docs/firebase'
     },
     {
       title: 'Quick Start',
       desc: 'Wrap your app with <AuthProvider> and render forms or protected routes.',
-      href: '#playground'
+      href: '/docs/quick-start'
     },
     {
       title: 'Authentication API',
       desc: 'Execute signup(), login(), and logout() with full error code preservation.',
-      href: '#architecture'
+      href: '/docs/signup'
     },
     {
       title: 'useAuth Hook',
       desc: 'Access { user, loading } state anywhere in your React component tree.',
-      href: '#dx'
+      href: '/docs/use-auth'
     },
     {
       title: 'ProtectedRoute Guard',
       desc: 'Guard private application views with customizable unauthenticated fallbacks.',
-      href: '#architecture'
+      href: '/docs/protected-route'
     }
   ]
 
@@ -47,7 +49,7 @@ export function DocumentationPreview() {
 
         <div className="rak-doc-grid">
           {docGuides.map((guide, idx) => (
-            <a
+            <Link
               key={idx}
               href={guide.href}
               className="rak-doc-card"
@@ -63,20 +65,18 @@ export function DocumentationPreview() {
               <span className="rak-doc-card-arrow">
                 Explore Guide →
               </span>
-            </a>
+            </Link>
           ))}
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <a
-            href="https://github.com/rajkishorock-arch/Raj-Authkit#readme"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/docs"
             className="rak-btn rak-btn-secondary"
             style={{ padding: '0.625rem 1.5rem' }}
           >
             Read Documentation →
-          </a>
+          </Link>
         </div>
       </div>
     </section>

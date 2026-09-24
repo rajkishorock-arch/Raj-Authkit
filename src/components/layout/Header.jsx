@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from '../../router/index.jsx'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -29,25 +30,25 @@ export function Header() {
       <div className="rak-container">
         <div className="rak-header-inner">
           {/* Logo / Brand */}
-          <a href="#" className="rak-brand" aria-label="Raj-AuthKit Home">
+          <Link href="/" className="rak-brand" aria-label="Raj-AuthKit Home">
             <span className="rak-brand-icon">R</span>
             <span>RAJ-AUTHKIT</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="rak-nav-desktop" aria-label="Main Navigation">
-            <a href="#capabilities" className="rak-nav-link">
+            <a href="/#capabilities" className="rak-nav-link">
               Features
             </a>
-            <a href="#components" className="rak-nav-link">
+            <a href="/#components" className="rak-nav-link">
               Components
             </a>
-            <a href="#architecture" className="rak-nav-link">
+            <a href="/#architecture" className="rak-nav-link">
               Architecture
             </a>
-            <a href="#docs" className="rak-nav-link">
+            <Link href="/docs" className="rak-nav-link">
               Documentation
-            </a>
+            </Link>
           </nav>
 
           {/* Header Action Buttons */}
@@ -65,7 +66,7 @@ export function Header() {
               <span className="rak-github-btn-text">GitHub</span>
             </a>
 
-            <a href="#playground" className="rak-btn rak-btn-primary" style={{ padding: '0.5rem 1rem' }}>
+            <a href="/#playground" className="rak-btn rak-btn-primary" style={{ padding: '0.5rem 1rem' }}>
               Get Started
             </a>
 
@@ -97,18 +98,18 @@ export function Header() {
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="rak-mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
-          <a href="#capabilities" className="rak-mobile-nav-link" onClick={closeMenu}>
+          <a href="/#capabilities" className="rak-mobile-nav-link" onClick={closeMenu}>
             Features
           </a>
-          <a href="#components" className="rak-mobile-nav-link" onClick={closeMenu}>
+          <a href="/#components" className="rak-mobile-nav-link" onClick={closeMenu}>
             Components
           </a>
-          <a href="#architecture" className="rak-mobile-nav-link" onClick={closeMenu}>
+          <a href="/#architecture" className="rak-mobile-nav-link" onClick={closeMenu}>
             Architecture
           </a>
-          <a href="#docs" className="rak-mobile-nav-link" onClick={closeMenu}>
+          <Link href="/docs" className="rak-mobile-nav-link" onClick={closeMenu}>
             Documentation
-          </a>
+          </Link>
           <a
             href="https://github.com/rajkishorock-arch/Raj-Authkit"
             target="_blank"
@@ -120,7 +121,7 @@ export function Header() {
           </a>
           <div style={{ marginTop: '1rem' }}>
             <a
-              href="#playground"
+              href="/#playground"
               className="rak-btn rak-btn-primary rak-btn-full"
               onClick={closeMenu}
             >

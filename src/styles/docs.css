@@ -1,0 +1,430 @@
+/* ==========================================================================
+   Raj-AuthKit Documentation Layout & Content Styles
+   ========================================================================== */
+
+/* Overall Docs Container */
+.rak-docs-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--rak-color-bg);
+  color: var(--rak-color-text);
+  overflow-x: hidden;
+}
+
+.rak-docs-layout {
+  display: flex;
+  width: 100%;
+  max-width: var(--rak-container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--rak-space-24);
+  position: relative;
+  flex-grow: 1;
+}
+
+@media (max-width: 640px) {
+  .rak-docs-layout {
+    padding: 0 var(--rak-space-16);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Sidebar
+   -------------------------------------------------------------------------- */
+.rak-docs-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 72px);
+  overflow-y: auto;
+  padding: var(--rak-space-32) var(--rak-space-16) var(--rak-space-48) 0;
+  border-right: 1px solid var(--rak-color-border-subtle);
+}
+
+@media (max-width: 960px) {
+  .rak-docs-sidebar {
+    display: none;
+  }
+}
+
+.rak-docs-group {
+  margin-bottom: var(--rak-space-24);
+}
+
+.rak-docs-group-title {
+  font-size: var(--rak-font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rak-color-text-muted);
+  margin-bottom: var(--rak-space-8);
+  padding-left: var(--rak-space-12);
+}
+
+.rak-docs-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rak-docs-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.45rem var(--rak-space-12);
+  border-radius: var(--rak-radius-md);
+  font-size: var(--rak-font-size-sm);
+  font-weight: 500;
+  color: var(--rak-color-text-muted);
+  text-decoration: none;
+  transition: all var(--rak-transition-fast);
+  border-left: 2px solid transparent;
+}
+
+.rak-docs-nav-item:hover {
+  color: var(--rak-color-text);
+  background-color: var(--rak-color-surface-secondary);
+}
+
+.rak-docs-nav-item.active {
+  color: var(--rak-color-primary);
+  font-weight: 600;
+  background-color: var(--rak-color-primary-subtle);
+  border-left-color: var(--rak-color-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Documentation Navigation Bar & Drawer
+   -------------------------------------------------------------------------- */
+.rak-docs-mobile-bar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--rak-space-12) var(--rak-space-16);
+  background-color: var(--rak-color-surface);
+  border-bottom: 1px solid var(--rak-color-border-subtle);
+  position: sticky;
+  top: 64px;
+  z-index: var(--rak-z-dropdown);
+}
+
+@media (max-width: 960px) {
+  .rak-docs-mobile-bar {
+    display: flex;
+  }
+}
+
+.rak-docs-mobile-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--rak-space-8);
+  background: var(--rak-color-surface-secondary);
+  border: 1px solid var(--rak-color-border);
+  color: var(--rak-color-text);
+  font-size: var(--rak-font-size-sm);
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--rak-radius-md);
+  cursor: pointer;
+}
+
+.rak-docs-mobile-drawer {
+  position: fixed;
+  top: 110px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--rak-color-bg);
+  padding: var(--rak-space-24);
+  overflow-y: auto;
+  z-index: var(--rak-z-modal);
+  border-top: 1px solid var(--rak-color-border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   Center Main Content
+   -------------------------------------------------------------------------- */
+.rak-docs-content {
+  flex-grow: 1;
+  min-width: 0;
+  max-width: 820px;
+  padding: var(--rak-space-40) var(--rak-space-40) var(--rak-space-96) var(--rak-space-48);
+}
+
+@media (max-width: 1180px) {
+  .rak-docs-content {
+    padding-right: var(--rak-space-24);
+  }
+}
+
+@media (max-width: 960px) {
+  .rak-docs-content {
+    max-width: 100%;
+    padding: var(--rak-space-32) 0 var(--rak-space-64) 0;
+  }
+}
+
+/* Documentation Content Typography */
+.rak-docs-article h1 {
+  font-size: var(--rak-font-size-4xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--rak-color-text);
+  line-height: 1.15;
+  margin-bottom: var(--rak-space-12);
+}
+
+@media (max-width: 640px) {
+  .rak-docs-article h1 {
+    font-size: 2.25rem;
+  }
+}
+
+.rak-docs-lead {
+  font-size: var(--rak-font-size-lg);
+  line-height: 1.6;
+  color: var(--rak-color-text-muted);
+  margin-bottom: var(--rak-space-32);
+  border-bottom: 1px solid var(--rak-color-border-subtle);
+  padding-bottom: var(--rak-space-24);
+}
+
+.rak-docs-article h2 {
+  font-size: var(--rak-font-size-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--rak-color-text);
+  margin-top: var(--rak-space-48);
+  margin-bottom: var(--rak-space-16);
+  scroll-margin-top: 100px;
+}
+
+.rak-docs-article h3 {
+  font-size: var(--rak-font-size-xl);
+  font-weight: 600;
+  color: var(--rak-color-text);
+  margin-top: var(--rak-space-32);
+  margin-bottom: var(--rak-space-12);
+  scroll-margin-top: 100px;
+}
+
+.rak-docs-article p {
+  font-size: var(--rak-font-size-base);
+  line-height: 1.7;
+  color: var(--rak-color-text);
+  margin-bottom: var(--rak-space-16);
+}
+
+.rak-docs-article ul,
+.rak-docs-article ol {
+  margin-bottom: var(--rak-space-24);
+  padding-left: var(--rak-space-24);
+  line-height: 1.7;
+  color: var(--rak-color-text);
+}
+
+.rak-docs-article li {
+  margin-bottom: var(--rak-space-8);
+}
+
+.rak-docs-article code:not(pre code) {
+  font-family: var(--rak-font-mono);
+  font-size: 0.875em;
+  background-color: var(--rak-color-surface-secondary);
+  color: var(--rak-color-primary);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--rak-radius-sm);
+  border: 1px solid var(--rak-color-border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   Reusable CodeBlock Component
+   -------------------------------------------------------------------------- */
+.rak-codeblock {
+  background-color: var(--rak-color-dark-bg);
+  border: 1px solid var(--rak-color-dark-border);
+  border-radius: var(--rak-radius-lg);
+  margin: var(--rak-space-20) 0 var(--rak-space-28) 0;
+  overflow: hidden;
+  box-shadow: var(--rak-shadow-md);
+}
+
+.rak-codeblock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--rak-space-8) var(--rak-space-16);
+  background-color: var(--rak-color-dark-surface);
+  border-bottom: 1px solid var(--rak-color-dark-border);
+}
+
+.rak-codeblock-lang {
+  font-family: var(--rak-font-mono);
+  font-size: var(--rak-font-size-xs);
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: lowercase;
+}
+
+.rak-codeblock-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid var(--rak-color-dark-border);
+  color: #cbd5e1;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--rak-radius-sm);
+  font-size: var(--rak-font-size-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--rak-transition-fast);
+}
+
+.rak-codeblock-copy:hover {
+  background-color: var(--rak-color-dark-surface-secondary);
+  color: #ffffff;
+  border-color: #475569;
+}
+
+.rak-codeblock-copy.copied {
+  color: var(--rak-color-success);
+  border-color: rgba(22, 163, 74, 0.4);
+  background-color: rgba(22, 163, 74, 0.1);
+}
+
+.rak-codeblock-pre {
+  margin: 0;
+  padding: var(--rak-space-16) var(--rak-space-20);
+  overflow-x: auto;
+  font-family: var(--rak-font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #f1f5f9;
+  white-space: pre;
+}
+
+/* Callout / Notice Box */
+.rak-callout {
+  padding: var(--rak-space-16) var(--rak-space-20);
+  border-radius: var(--rak-radius-lg);
+  margin: var(--rak-space-24) 0;
+  border-left: 4px solid var(--rak-color-primary);
+  background-color: var(--rak-color-primary-subtle);
+  border-top: 1px solid var(--rak-color-primary-border);
+  border-right: 1px solid var(--rak-color-primary-border);
+  border-bottom: 1px solid var(--rak-color-primary-border);
+}
+
+.rak-callout-warning {
+  border-left-color: var(--rak-color-warning);
+  background-color: rgba(217, 119, 6, 0.08);
+  border-top-color: rgba(217, 119, 6, 0.2);
+  border-right-color: rgba(217, 119, 6, 0.2);
+  border-bottom-color: rgba(217, 119, 6, 0.2);
+}
+
+.rak-callout-title {
+  font-size: var(--rak-font-size-sm);
+  font-weight: 700;
+  color: var(--rak-color-text);
+  margin-bottom: var(--rak-space-4);
+}
+
+.rak-callout p {
+  font-size: var(--rak-font-size-sm);
+  color: var(--rak-color-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Right TOC ("On this page")
+   -------------------------------------------------------------------------- */
+.rak-docs-toc {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 72px);
+  overflow-y: auto;
+  padding: var(--rak-space-32) 0 var(--rak-space-48) var(--rak-space-24);
+  border-left: 1px solid var(--rak-color-border-subtle);
+}
+
+@media (max-width: 1240px) {
+  .rak-docs-toc {
+    display: none;
+  }
+}
+
+.rak-docs-toc-title {
+  font-size: var(--rak-font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rak-color-text-muted);
+  margin-bottom: var(--rak-space-12);
+}
+
+.rak-docs-toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rak-space-8);
+}
+
+.rak-docs-toc-link {
+  font-size: var(--rak-font-size-xs);
+  color: var(--rak-color-text-muted);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color var(--rak-transition-fast);
+}
+
+.rak-docs-toc-link:hover {
+  color: var(--rak-color-primary);
+}
+
+/* Documentation Pagination / Next Previous Footer */
+.rak-docs-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--rak-space-16);
+  margin-top: var(--rak-space-64);
+  padding-top: var(--rak-space-24);
+  border-top: 1px solid var(--rak-color-border-subtle);
+}
+
+.rak-docs-pager-btn {
+  display: flex;
+  flex-direction: column;
+  padding: var(--rak-space-12) var(--rak-space-16);
+  border: 1px solid var(--rak-color-border-subtle);
+  border-radius: var(--rak-radius-lg);
+  background: var(--rak-color-surface);
+  text-decoration: none;
+  transition: all var(--rak-transition-fast);
+  max-width: 260px;
+}
+
+.rak-docs-pager-btn:hover {
+  border-color: var(--rak-color-primary);
+  background: var(--rak-color-surface-secondary);
+}
+
+.rak-docs-pager-label {
+  font-size: var(--rak-font-size-xs);
+  color: var(--rak-color-text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.rak-docs-pager-title {
+  font-size: var(--rak-font-size-sm);
+  color: var(--rak-color-primary);
+  font-weight: 600;
+  margin-top: 2px;
+}

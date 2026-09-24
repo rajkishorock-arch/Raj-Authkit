@@ -1,3 +1,5 @@
+import { Link } from '../../router/index.jsx'
+
 export function Footer() {
   return (
     <footer className="rak-footer">
@@ -5,10 +7,10 @@ export function Footer() {
         <div className="rak-footer-grid">
           {/* Brand Col */}
           <div className="rak-footer-col">
-            <a href="#" className="rak-brand" style={{ marginBottom: '1rem' }}>
+            <Link href="/" className="rak-brand" style={{ marginBottom: '1rem' }}>
               <span className="rak-brand-icon">R</span>
               <span>RAJ-AUTHKIT</span>
-            </a>
+            </Link>
             <p style={{ fontSize: 'var(--rak-font-size-sm)', color: 'var(--rak-color-text-muted)', lineHeight: 1.6, maxWidth: '320px' }}>
               A modular, lightweight Firebase authentication toolkit and design system for modern React applications.
             </p>
@@ -19,22 +21,22 @@ export function Footer() {
             <h4>Product</h4>
             <ul className="rak-footer-links">
               <li>
-                <a href="#capabilities" className="rak-footer-link">
+                <a href="/#capabilities" className="rak-footer-link">
                   Features
                 </a>
               </li>
               <li>
-                <a href="#components" className="rak-footer-link">
+                <a href="/#components" className="rak-footer-link">
                   Components
                 </a>
               </li>
               <li>
-                <a href="#architecture" className="rak-footer-link">
+                <a href="/#architecture" className="rak-footer-link">
                   Architecture
                 </a>
               </li>
               <li>
-                <a href="#playground" className="rak-footer-link">
+                <a href="/#playground" className="rak-footer-link">
                   Playground
                 </a>
               </li>
@@ -46,9 +48,9 @@ export function Footer() {
             <h4>Developers</h4>
             <ul className="rak-footer-links">
               <li>
-                <a href="#docs" className="rak-footer-link">
+                <Link href="/docs" className="rak-footer-link">
                   Documentation
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -61,12 +63,12 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#dx" className="rak-footer-link">
+                <Link href="/docs/components" className="rak-footer-link">
                   Code Examples
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#whats-new" className="rak-footer-link">
+                <a href="/#whats-new" className="rak-footer-link">
                   Changelog
                 </a>
               </li>
@@ -78,12 +80,12 @@ export function Footer() {
             <h4>Resources</h4>
             <ul className="rak-footer-links">
               <li>
-                <a href="#opensource" className="rak-footer-link">
+                <a href="/#opensource" className="rak-footer-link">
                   Open Source
                 </a>
               </li>
               <li>
-                <a href="#problem" className="rak-footer-link">
+                <a href="/#problem" className="rak-footer-link">
                   Why Raj-AuthKit
                 </a>
               </li>

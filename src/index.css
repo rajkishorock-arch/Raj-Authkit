@@ -2,6 +2,7 @@
 @import './styles/animations.css';
 @import './styles/components.css';
 @import './styles/website.css';
+@import './styles/docs.css';
 
 /* Baseline Box-Sizing & Reset */
 *,
