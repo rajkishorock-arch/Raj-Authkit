@@ -38,27 +38,29 @@ export function LoginContent() {
           filename="src/auth/authService.js"
           code={`login(email: string, password: string): Promise<UserCredential>`}
         />
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.65rem' }}>Parameter</th>
-              <th style={{ padding: '0.65rem' }}>Type</th>
-              <th style={{ padding: '0.65rem' }}>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>email</code></td>
-              <td style={{ padding: '0.65rem' }}><code>string</code></td>
-              <td style={{ padding: '0.65rem' }}>Registered account email address.</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.65rem' }}><code>password</code></td>
-              <td style={{ padding: '0.65rem' }}><code>string</code></td>
-              <td style={{ padding: '0.65rem' }}>Account authentication password.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="rak-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>email</code></td>
+                <td><code>string</code></td>
+                <td>Registered account email address.</td>
+              </tr>
+              <tr>
+                <td><code>password</code></td>
+                <td><code>string</code></td>
+                <td>Account authentication password.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* 3. Implementation Example */}
@@ -105,32 +107,34 @@ async function handleSignIn(email, password) {
         <Callout type="warning" title="Anti-Enumeration Protection">
           Firebase v10+ returns <code>auth/invalid-credential</code> for both non-existent emails and incorrect passwords to prevent malicious actors from discovering valid accounts.
         </Callout>
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.65rem' }}>Firebase Error Code</th>
-              <th style={{ padding: '0.65rem' }}>Cause & Remediation</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>auth/invalid-credential</code></td>
-              <td style={{ padding: '0.65rem' }}>Email or password does not match any existing record.</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>auth/too-many-requests</code></td>
-              <td style={{ padding: '0.65rem' }}>Account temporarily locked due to repeated attempts. Wait several minutes.</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>auth/user-disabled</code></td>
-              <td style={{ padding: '0.65rem' }}>The account has been suspended by an administrator.</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.65rem' }}><code>auth/network-request-failed</code></td>
-              <td style={{ padding: '0.65rem' }}>Client could not reach Firebase authentication endpoints.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="rak-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Firebase Error Code</th>
+                <th>Cause & Remediation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>auth/invalid-credential</code></td>
+                <td>Email or password does not match any existing record.</td>
+              </tr>
+              <tr>
+                <td><code>auth/too-many-requests</code></td>
+                <td>Account temporarily locked due to repeated attempts. Wait several minutes.</td>
+              </tr>
+              <tr>
+                <td><code>auth/user-disabled</code></td>
+                <td>The account has been suspended by an administrator.</td>
+              </tr>
+              <tr>
+                <td><code>auth/network-request-failed</code></td>
+                <td>Client could not reach Firebase authentication endpoints.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* 6. Prebuilt LoginForm */}

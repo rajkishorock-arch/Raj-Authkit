@@ -33,36 +33,38 @@ export function ProtectedRouteContent() {
       {/* 2. Component API */}
       <section id="component-api" className="rak-docs-section">
         <h2>Component API</h2>
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.65rem' }}>Prop</th>
-              <th style={{ padding: '0.65rem' }}>Type</th>
-              <th style={{ padding: '0.65rem' }}>Default</th>
-              <th style={{ padding: '0.65rem' }}>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>children</code></td>
-              <td style={{ padding: '0.65rem' }}><code>ReactNode</code></td>
-              <td style={{ padding: '0.65rem' }}><em>Required</em></td>
-              <td style={{ padding: '0.65rem' }}>Private content rendered exclusively when authenticated.</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>fallback</code></td>
-              <td style={{ padding: '0.65rem' }}><code>ReactNode</code></td>
-              <td style={{ padding: '0.65rem' }}><code>null</code></td>
-              <td style={{ padding: '0.65rem' }}>Content rendered when unauthenticated (e.g. <code>&lt;LoginForm /&gt;</code>).</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.65rem' }}><code>loadingFallback</code></td>
-              <td style={{ padding: '0.65rem' }}><code>ReactNode</code></td>
-              <td style={{ padding: '0.65rem' }}>Default Spinner</td>
-              <td style={{ padding: '0.65rem' }}>Custom loading view shown while Firebase inspects local tokens.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="rak-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Prop</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>children</code></td>
+                <td><code>ReactNode</code></td>
+                <td><em>Required</em></td>
+                <td>Private content rendered exclusively when authenticated.</td>
+              </tr>
+              <tr>
+                <td><code>fallback</code></td>
+                <td><code>ReactNode</code></td>
+                <td><code>null</code></td>
+                <td>Content rendered when unauthenticated (e.g. <code>&lt;LoginForm /&gt;</code>).</td>
+              </tr>
+              <tr>
+                <td><code>loadingFallback</code></td>
+                <td><code>ReactNode</code></td>
+                <td>Default Spinner</td>
+                <td>Custom loading view shown while Firebase inspects local tokens.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* 3. Implementation Example */}

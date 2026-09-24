@@ -40,27 +40,29 @@ export function UseAuthContent() {
   loading: boolean;
 }`}
         />
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.65rem' }}>Property</th>
-              <th style={{ padding: '0.65rem' }}>Type</th>
-              <th style={{ padding: '0.65rem' }}>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>user</code></td>
-              <td style={{ padding: '0.65rem' }}><code>User | null</code></td>
-              <td style={{ padding: '0.65rem' }}>Active Firebase User record, or <code>null</code> when unauthenticated.</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.65rem' }}><code>loading</code></td>
-              <td style={{ padding: '0.65rem' }}><code>boolean</code></td>
-              <td style={{ padding: '0.65rem' }}><code>true</code> while determining initial session token persistence on startup.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="rak-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>user</code></td>
+                <td><code>User | null</code></td>
+                <td>Active Firebase User record, or <code>null</code> when unauthenticated.</td>
+              </tr>
+              <tr>
+                <td><code>loading</code></td>
+                <td><code>boolean</code></td>
+                <td><code>true</code> while determining initial session token persistence on startup.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* 3. State Lifecycle & Transitions */}
@@ -69,36 +71,38 @@ export function UseAuthContent() {
         <p>
           On application startup or browser reload, Firebase must inspect local IndexedDB storage to verify persisted session tokens. <code>useAuth()</code> transitions through three clear stages:
         </p>
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.65rem' }}>Stage</th>
-              <th style={{ padding: '0.65rem' }}><code>loading</code></th>
-              <th style={{ padding: '0.65rem' }}><code>user</code></th>
-              <th style={{ padding: '0.65rem' }}>Consumer Behavior</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><strong>1. Initialization</strong></td>
-              <td style={{ padding: '0.65rem' }}><code>true</code></td>
-              <td style={{ padding: '0.65rem' }}><code>null</code></td>
-              <td style={{ padding: '0.65rem' }}>Render loading skeleton / spinner; do not flash fallback screens.</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><strong>2. Authenticated</strong></td>
-              <td style={{ padding: '0.65rem' }}><code>false</code></td>
-              <td style={{ padding: '0.65rem' }}><code>User</code> object</td>
-              <td style={{ padding: '0.65rem' }}>Render private application content; access <code>user.email</code>.</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.65rem' }}><strong>3. Unauthenticated</strong></td>
-              <td style={{ padding: '0.65rem' }}><code>false</code></td>
-              <td style={{ padding: '0.65rem' }}><code>null</code></td>
-              <td style={{ padding: '0.65rem' }}>Render public views, sign-in forms, or landing pages.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="rak-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th><code>loading</code></th>
+                <th><code>user</code></th>
+                <th>Consumer Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Initialization</strong></td>
+                <td><code>true</code></td>
+                <td><code>null</code></td>
+                <td>Render loading skeleton / spinner; do not flash fallback screens.</td>
+              </tr>
+              <tr>
+                <td><strong>2. Authenticated</strong></td>
+                <td><code>false</code></td>
+                <td><code>User</code> object</td>
+                <td>Render private application content; access <code>user.email</code>.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Unauthenticated</strong></td>
+                <td><code>false</code></td>
+                <td><code>null</code></td>
+                <td>Render public views, sign-in forms, or landing pages.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* 4. Implementation Example */}

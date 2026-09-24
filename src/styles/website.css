@@ -936,16 +936,22 @@
   margin-bottom: var(--rak-space-64);
 }
 
-@media (max-width: 880px) {
-  .rak-footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--rak-space-32);
-  }
-}
-
-@media (max-width: 540px) {
+@media (max-width: 768px) {
   .rak-footer-grid {
     grid-template-columns: 1fr;
+    gap: var(--rak-space-32);
+    margin-bottom: var(--rak-space-40);
+  }
+
+  .rak-footer {
+    padding-top: var(--rak-space-48);
+    padding-bottom: var(--rak-space-32);
+  }
+
+  .rak-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--rak-space-8);
   }
 }
 

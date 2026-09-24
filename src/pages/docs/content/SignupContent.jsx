@@ -41,27 +41,29 @@ export function SignupContent() {
           filename="src/auth/authService.js"
           code={`signup(email: string, password: string): Promise<UserCredential>`}
         />
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.65rem' }}>Parameter</th>
-              <th style={{ padding: '0.65rem' }}>Type</th>
-              <th style={{ padding: '0.65rem' }}>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>email</code></td>
-              <td style={{ padding: '0.65rem' }}><code>string</code></td>
-              <td style={{ padding: '0.65rem' }}>Standard email format (e.g. <code>user@domain.com</code>).</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.65rem' }}><code>password</code></td>
-              <td style={{ padding: '0.65rem' }}><code>string</code></td>
-              <td style={{ padding: '0.65rem' }}>Must meet Firebase minimum requirement of 6 characters.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="rak-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>email</code></td>
+                <td><code>string</code></td>
+                <td>Standard email format (e.g. <code>user@domain.com</code>).</td>
+              </tr>
+              <tr>
+                <td><code>password</code></td>
+                <td><code>string</code></td>
+                <td>Must meet Firebase minimum requirement of 6 characters.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* 3. Implementation Example */}
@@ -108,32 +110,34 @@ async function handleRegister(email, password) {
         <p>
           Errors thrown by <code>signup()</code> preserve native Firebase error properties for robust diagnostics:
         </p>
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
-          <thead>
-            <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.65rem' }}>Firebase Error Code</th>
-              <th style={{ padding: '0.65rem' }}>Recommended User Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>auth/email-already-in-use</code></td>
-              <td style={{ padding: '0.65rem' }}>An account with this email address already exists.</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>auth/invalid-email</code></td>
-              <td style={{ padding: '0.65rem' }}>Please enter a valid email address.</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.65rem' }}><code>auth/weak-password</code></td>
-              <td style={{ padding: '0.65rem' }}>Password should be at least 6 characters.</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.65rem' }}><code>auth/network-request-failed</code></td>
-              <td style={{ padding: '0.65rem' }}>Network error. Please check your internet connection.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="rak-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Firebase Error Code</th>
+                <th>Recommended User Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>auth/email-already-in-use</code></td>
+                <td>An account with this email address already exists.</td>
+              </tr>
+              <tr>
+                <td><code>auth/invalid-email</code></td>
+                <td>Please enter a valid email address.</td>
+              </tr>
+              <tr>
+                <td><code>auth/weak-password</code></td>
+                <td>Password should be at least 6 characters.</td>
+              </tr>
+              <tr>
+                <td><code>auth/network-request-failed</code></td>
+                <td>Network error. Please check your internet connection.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* 6. Prebuilt SignupForm */}
