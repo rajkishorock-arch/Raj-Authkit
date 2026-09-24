@@ -1,0 +1,309 @@
+/* ==========================================================================
+   Raj-AuthKit Component Styles
+   ========================================================================== */
+
+/* Keyframes */
+@keyframes rak-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Button Component
+   -------------------------------------------------------------------------- */
+.rak-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rak-space-sm);
+  padding: 0.625rem 1.25rem;
+  font-family: var(--rak-font-sans);
+  font-size: var(--rak-font-size-sm);
+  font-weight: 600;
+  line-height: 1.25;
+  border-radius: var(--rak-radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--rak-transition),
+    border-color var(--rak-transition),
+    box-shadow var(--rak-transition),
+    opacity var(--rak-transition);
+  text-decoration: none;
+  user-select: none;
+}
+
+.rak-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--rak-focus-ring);
+}
+
+.rak-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+.rak-btn-primary {
+  background-color: var(--rak-color-primary);
+  color: var(--rak-color-primary-text);
+  border-color: transparent;
+}
+
+.rak-btn-primary:hover:not(:disabled) {
+  background-color: var(--rak-color-primary-hover);
+}
+
+.rak-btn-primary:active:not(:disabled) {
+  background-color: var(--rak-color-primary-active);
+}
+
+.rak-btn-secondary {
+  background-color: var(--rak-color-surface);
+  color: var(--rak-color-text);
+  border-color: var(--rak-color-border);
+}
+
+.rak-btn-secondary:hover:not(:disabled) {
+  background-color: var(--rak-color-bg);
+  border-color: var(--rak-color-text-muted);
+}
+
+.rak-btn-full {
+  width: 100%;
+}
+
+.rak-btn-spinner-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.rak-btn-content-loading {
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   Input & Form Controls
+   -------------------------------------------------------------------------- */
+.rak-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rak-space-xs);
+  margin-bottom: var(--rak-space-md);
+  text-align: left;
+}
+
+.rak-input-label {
+  font-size: var(--rak-font-size-sm);
+  font-weight: 500;
+  color: var(--rak-color-text);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rak-required-mark {
+  color: var(--rak-color-error);
+}
+
+.rak-input-control {
+  width: 100%;
+  font-family: var(--rak-font-sans);
+  font-size: var(--rak-font-size-base);
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
+  color: var(--rak-color-text);
+  background-color: var(--rak-color-surface);
+  border: 1px solid var(--rak-color-border);
+  border-radius: var(--rak-radius-md);
+  transition: border-color var(--rak-transition), box-shadow var(--rak-transition);
+}
+
+.rak-input-control::placeholder {
+  color: var(--rak-color-text-muted);
+  opacity: 0.8;
+}
+
+.rak-input-control:focus-visible {
+  outline: none;
+  border-color: var(--rak-color-primary);
+  box-shadow: var(--rak-focus-ring);
+}
+
+.rak-input-control:disabled {
+  background-color: #f1f5f9;
+  color: var(--rak-color-text-muted);
+  cursor: not-allowed;
+}
+
+.rak-input-has-error .rak-input-control {
+  border-color: var(--rak-color-error);
+}
+
+.rak-input-has-error .rak-input-control:focus-visible {
+  border-color: var(--rak-color-error);
+  box-shadow: var(--rak-focus-ring-error);
+}
+
+.rak-input-error-msg {
+  font-size: var(--rak-font-size-xs);
+  color: var(--rak-color-error);
+  margin-top: 0.125rem;
+}
+
+.rak-input-helper-msg {
+  font-size: var(--rak-font-size-xs);
+  color: var(--rak-color-text-muted);
+  margin-top: 0.125rem;
+}
+
+/* --------------------------------------------------------------------------
+   Password Input Specifics
+   -------------------------------------------------------------------------- */
+.rak-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.rak-password-control {
+  padding-right: 2.75rem;
+}
+
+.rak-password-toggle-btn {
+  position: absolute;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--rak-radius-sm);
+  color: var(--rak-color-text-muted);
+  cursor: pointer;
+  transition: color var(--rak-transition), background-color var(--rak-transition);
+}
+
+.rak-password-toggle-btn:hover:not(:disabled) {
+  color: var(--rak-color-text);
+  background-color: var(--rak-color-bg);
+}
+
+.rak-password-toggle-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--rak-focus-ring);
+}
+
+.rak-password-toggle-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   Alert Component
+   -------------------------------------------------------------------------- */
+.rak-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--rak-space-sm);
+  padding: var(--rak-space-md);
+  border-radius: var(--rak-radius-md);
+  border: 1px solid transparent;
+  font-size: var(--rak-font-size-sm);
+  line-height: 1.4;
+  margin-bottom: var(--rak-space-md);
+  text-align: left;
+}
+
+.rak-alert-icon-wrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rak-alert-body {
+  flex: 1;
+}
+
+.rak-alert-title {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.rak-alert-error {
+  background-color: var(--rak-color-error-bg);
+  border-color: var(--rak-color-error-border);
+  color: var(--rak-color-error-text);
+}
+
+.rak-alert-success {
+  background-color: var(--rak-color-success-bg);
+  border-color: var(--rak-color-success-border);
+  color: var(--rak-color-success-text);
+}
+
+.rak-alert-info {
+  background-color: var(--rak-color-info-bg);
+  border-color: var(--rak-color-info-border);
+  color: var(--rak-color-info-text);
+}
+
+/* --------------------------------------------------------------------------
+   AuthCard Container
+   -------------------------------------------------------------------------- */
+.rak-auth-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--rak-color-surface);
+  border: 1px solid var(--rak-color-border-subtle);
+  border-radius: var(--rak-radius-xl);
+  box-shadow: var(--rak-shadow-md);
+  padding: var(--rak-space-xl);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .rak-auth-card {
+    padding: var(--rak-space-lg);
+    border-radius: var(--rak-radius-lg);
+  }
+}
+
+.rak-auth-card-header {
+  text-align: center;
+  margin-bottom: var(--rak-space-xl);
+}
+
+.rak-auth-card-title {
+  font-size: var(--rak-font-size-xl);
+  font-weight: 700;
+  color: var(--rak-color-text);
+  letter-spacing: -0.015em;
+  margin-bottom: var(--rak-space-xs);
+}
+
+.rak-auth-card-description {
+  font-size: var(--rak-font-size-sm);
+  color: var(--rak-color-text-muted);
+}
+
+.rak-auth-card-content {
+  width: 100%;
+}
+
+.rak-auth-card-footer {
+  margin-top: var(--rak-space-lg);
+  padding-top: var(--rak-space-md);
+  border-top: 1px solid var(--rak-color-border-subtle);
+  text-align: center;
+  font-size: var(--rak-font-size-sm);
+  color: var(--rak-color-text-muted);
+}

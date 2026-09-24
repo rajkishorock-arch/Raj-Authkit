@@ -1,0 +1,69 @@
+:root {
+  /* Typography */
+  --rak-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --rak-font-size-xs: 0.75rem;
+  --rak-font-size-sm: 0.875rem;
+  --rak-font-size-base: 1rem;
+  --rak-font-size-lg: 1.125rem;
+  --rak-font-size-xl: 1.25rem;
+  --rak-font-size-2xl: 1.5rem;
+
+  /* Colors - Base */
+  --rak-color-bg: #f8fafc;
+  --rak-color-surface: #ffffff;
+  --rak-color-text: #0f172a;
+  --rak-color-text-muted: #64748b;
+  --rak-color-border: #cbd5e1;
+  --rak-color-border-subtle: #e2e8f0;
+
+  /* Colors - Primary Accent */
+  --rak-color-primary: #2563eb;
+  --rak-color-primary-hover: #1d4ed8;
+  --rak-color-primary-active: #1e40af;
+  --rak-color-primary-text: #ffffff;
+  --rak-color-primary-subtle: #eff6ff;
+
+  /* Colors - Feedback & States */
+  --rak-color-error: #dc2626;
+  --rak-color-error-bg: #fef2f2;
+  --rak-color-error-border: #fecaca;
+  --rak-color-error-text: #991b1b;
+
+  --rak-color-success: #16a34a;
+  --rak-color-success-bg: #f0fdf4;
+  --rak-color-success-border: #bbf7d0;
+  --rak-color-success-text: #166534;
+
+  --rak-color-info: #0284c7;
+  --rak-color-info-bg: #f0f9ff;
+  --rak-color-info-border: #bae6fd;
+  --rak-color-info-text: #075985;
+
+  /* Focus Ring */
+  --rak-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  --rak-focus-ring-error: 0 0 0 3px rgba(220, 38, 38, 0.2);
+
+  /* Spacing */
+  --rak-space-xs: 0.25rem;
+  --rak-space-sm: 0.5rem;
+  --rak-space-md: 0.75rem;
+  --rak-space-lg: 1rem;
+  --rak-space-xl: 1.5rem;
+  --rak-space-2xl: 2rem;
+
+  /* Borders & Radius */
+  --rak-radius-sm: 4px;
+  --rak-radius-md: 6px;
+  --rak-radius-lg: 8px;
+  --rak-radius-xl: 12px;
+  --rak-radius-full: 9999px;
+
+  /* Shadows */
+  --rak-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --rak-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --rak-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+
+  /* Transitions */
+  --rak-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
