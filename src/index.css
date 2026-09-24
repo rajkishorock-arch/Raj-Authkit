@@ -1,5 +1,7 @@
 @import './styles/theme.css';
+@import './styles/animations.css';
 @import './styles/components.css';
+@import './styles/website.css';
 
 /* Baseline Box-Sizing & Reset */
 *,
@@ -10,15 +12,15 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--rak-font-sans);
   background-color: var(--rak-color-bg);
   color: var(--rak-color-text);
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--rak-space-lg);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,72 +35,8 @@ textarea {
   font-family: inherit;
 }
 
-/* App container */
-.app-container {
-  width: 100%;
-  max-width: 580px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--rak-space-xl);
-}
-
-.header-card {
-  background: var(--rak-color-surface);
-  padding: var(--rak-space-xl);
-  border-radius: var(--rak-radius-xl);
-  border: 1px solid var(--rak-color-border-subtle);
-  box-shadow: var(--rak-shadow-sm);
-  text-align: center;
-}
-
-.title {
-  font-size: var(--rak-font-size-2xl);
-  font-weight: 700;
-  color: var(--rak-color-text);
-  margin-bottom: var(--rak-space-xs);
-  letter-spacing: -0.02em;
-}
-
-.subtitle {
-  font-size: var(--rak-font-size-base);
-  font-weight: 500;
-  color: var(--rak-color-text-muted);
-  margin-bottom: var(--rak-space-md);
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.35rem 0.85rem;
-  font-size: var(--rak-font-size-sm);
-  font-weight: 600;
-  color: var(--rak-color-primary);
-  background-color: var(--rak-color-primary-subtle);
-  border: 1px solid #bfdbfe;
-  border-radius: var(--rak-radius-full);
-}
-
-.section-label {
-  font-size: var(--rak-font-size-xs);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--rak-color-text-muted);
-  margin-bottom: var(--rak-space-sm);
-}
-
-.preview-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--rak-space-md);
-}
-
-.preview-row {
-  display: flex;
-  gap: var(--rak-space-md);
-  flex-wrap: wrap;
-}
-
-.preview-row > * {
-  flex: 1;
-  min-width: 140px;
+/* Focus Visible Global Outline */
+:focus-visible {
+  outline: 2px solid var(--rak-color-primary);
+  outline-offset: 2px;
 }

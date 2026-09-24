@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Raj-AuthKit Animation System & Micro-Interactions
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes rak-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rak-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rak-pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.04);
+  }
+}
+
+/* Staggered entrance animation utility classes */
+.rak-animate-fade-in {
+  animation: rak-fade-in 400ms ease forwards;
+}
+
+.rak-animate-slide-up {
+  animation: rak-slide-up 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.rak-delay-1 {
+  animation-delay: 80ms;
+}
+
+.rak-delay-2 {
+  animation-delay: 160ms;
+}
+
+.rak-delay-3 {
+  animation-delay: 240ms;
+}
+
+.rak-delay-4 {
+  animation-delay: 320ms;
+}
+
+.rak-delay-5 {
+  animation-delay: 400ms;
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .rak-animate-fade-in,
+  .rak-animate-slide-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
