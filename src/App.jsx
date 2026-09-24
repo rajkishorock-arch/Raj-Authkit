@@ -1,95 +1,96 @@
 import { useState } from 'react'
 import { useAuth } from './auth/useAuth.js'
-import { Button } from './components/ui/Button.jsx'
-import { Input } from './components/ui/Input.jsx'
-import { PasswordInput } from './components/ui/PasswordInput.jsx'
-import { Alert } from './components/ui/Alert.jsx'
+import { logout } from './auth/authService.js'
+import { LoginForm } from './components/auth/LoginForm.jsx'
+import { SignupForm } from './components/auth/SignupForm.jsx'
 import { AuthCard } from './components/auth/AuthCard.jsx'
+import { Button } from './components/ui/Button.jsx'
+import { Spinner } from './components/ui/Spinner.jsx'
 
 function App() {
   const { user, loading } = useAuth()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSimulatedLoading, setIsSimulatedLoading] = useState(false)
+  const [authMode, setAuthMode] = useState('login') // 'login' | 'signup'
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
 
-  let authStatusDescription = 'Determining authentication state...'
-  if (!loading) {
-    authStatusDescription = user
-      ? `Authenticated (${user.email || user.uid})`
-      : 'No user authenticated'
+  const handleLogout = async () => {
+    setIsLoggingOut(true)
+    try {
+      await logout()
+    } catch (err) {
+      console.error('Logout error:', err)
+    } finally {
+      setIsLoggingOut(false)
+    }
   }
 
   return (
     <div className="app-container">
-      {/* Header and Step Info */}
-      <div className="header-card">
+      {/* Brand Header */}
+      <header className="header-card">
         <h1 className="title">Raj-AuthKit</h1>
         <p className="subtitle">Reusable Firebase Authentication Toolkit</p>
-        <span className="badge">Development Step 5 — UI Foundation</span>
-        <p style={{ marginTop: '0.75rem', fontSize: '0.875rem', color: 'var(--rak-color-text-muted)' }}>
-          Auth State: {loading ? 'Loading...' : authStatusDescription}
-        </p>
-      </div>
+        <span className="badge">Development Step 6 — Login & Signup UI</span>
+      </header>
 
-      {/* Component Foundation Preview Showcase */}
-      <AuthCard
-        title="UI Component Showcase"
-        description="Preview of accessible, reusable authentication components"
-        footer={<span>Raj-AuthKit Design System • Clean, Accessible, Responsive</span>}
-      >
-        <div className="preview-grid">
-          {/* Alert Preview */}
-          <Alert type="error" title="Error Alert">
-            Invalid email or password provided.
-          </Alert>
+      {/* Main Authentication View */}
+      <main>
+        {loading ? (
+          <AuthCard title="Checking Session" description="Connecting to authentication service...">
+            <div style={{ textAlign: 'center', padding: '2rem 0' }}>
+              <Spinner size="lg" color="var(--rak-color-primary)" />
+            </div>
+          </AuthCard>
+        ) : user ? (
+          /* Authenticated State */
+          <AuthCard
+            title="Authenticated Session"
+            description="You are currently signed in"
+            footer={
+              <span>
+                Raj-AuthKit • AuthState synchronized with Firebase
+              </span>
+            }
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
+              <div style={{
+                background: 'var(--rak-color-bg)',
+                padding: '1rem',
+                borderRadius: 'var(--rak-radius-md)',
+                border: '1px solid var(--rak-color-border-subtle)'
+              }}>
+                <p style={{ fontSize: '0.875rem', color: 'var(--rak-color-text-muted)', marginBottom: '0.25rem' }}>
+                  Email:
+                </p>
+                <p style={{ fontWeight: 600, color: 'var(--rak-color-text)' }}>
+                  {user.email || 'No email provided'}
+                </p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--rak-color-text-muted)', marginTop: '0.5rem', marginBottom: '0.25rem' }}>
+                  UID:
+                </p>
+                <p style={{ fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--rak-color-text)' }}>
+                  {user.uid}
+                </p>
+              </div>
 
-          <Alert type="success" title="Success Alert">
-            Authentication action succeeded.
-          </Alert>
-
-          {/* Input Preview */}
-          <Input
-            label="Email Address"
-            name="preview-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="developer@example.com"
-            required
-            helperText="Accessible input with clear focus ring and label linkage."
-          />
-
-          {/* Password Input with Visibility Toggle */}
-          <PasswordInput
-            label="Password"
-            name="preview-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            required
-            helperText="Click the toggle icon or focus and press Enter/Space."
-          />
-
-          {/* Buttons Preview */}
-          <div className="preview-row">
-            <Button
-              variant="primary"
-              fullWidth
-              onClick={() => setIsSimulatedLoading((prev) => !prev)}
-            >
-              Toggle Loading
-            </Button>
-
-            <Button
-              variant="secondary"
-              loading={isSimulatedLoading}
-              fullWidth
-            >
-              Interactive State
-            </Button>
-          </div>
-        </div>
-      </AuthCard>
+              <Button
+                variant="secondary"
+                fullWidth
+                onClick={handleLogout}
+                loading={isLoggingOut}
+                disabled={isLoggingOut}
+              >
+                Sign Out
+              </Button>
+            </div>
+          </AuthCard>
+        ) : authMode === 'login' ? (
+          /* Login Form */
+          <LoginForm onSwitchToSignup={() => setAuthMode('signup')} />
+        ) : (
+          /* Signup Form */
+          <SignupForm onSwitchToLogin={() => setAuthMode('login')} />
+        )}
+      </main>
     </div>
   )
 }

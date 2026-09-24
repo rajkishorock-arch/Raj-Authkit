@@ -307,3 +307,44 @@
   font-size: var(--rak-font-size-sm);
   color: var(--rak-color-text-muted);
 }
+
+/* --------------------------------------------------------------------------
+   Auth Forms & Interactive Links
+   -------------------------------------------------------------------------- */
+.rak-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rak-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--rak-color-primary);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--rak-transition);
+  display: inline;
+}
+
+.rak-link-btn:hover:not(:disabled) {
+  color: var(--rak-color-primary-hover);
+}
+
+.rak-link-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--rak-focus-ring);
+  border-radius: var(--rak-radius-sm);
+}
+
+.rak-link-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
