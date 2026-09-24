@@ -1,22 +1,26 @@
 import { CodeBlock } from '../../../components/docs/CodeBlock.jsx'
+import { Callout } from '../../../components/docs/Callout.jsx'
 import { Link } from '../../../router/index.jsx'
 
 export const firebaseHeadings = [
   { id: 'env-vars', title: 'Environment Variables' },
-  { id: 'env-example', title: 'Template Configuration (.env.example)' },
-  { id: 'validation', title: 'Automatic Configuration Validation' },
+  { id: 'env-example', title: 'Configuration Template (.env.example)' },
+  { id: 'validation', title: 'Automatic Environment Validation' },
   { id: 'security-warning', title: 'Security Best Practice' }
 ]
 
 export function FirebaseSetupContent() {
   return (
     <article className="rak-docs-article">
-      <h1>Firebase Setup</h1>
-      <p className="rak-docs-lead">
-        Configuring Firebase Authentication environment parameters in Vite.
-      </p>
+      <header className="rak-docs-hero">
+        <span className="rak-section-badge">Getting Started</span>
+        <h1>Firebase Setup</h1>
+        <p className="rak-docs-lead">
+          Configuring Firebase Authentication environment parameters in Vite without exposing secrets.
+        </p>
+      </header>
 
-      <section id="env-vars">
+      <section id="env-vars" className="rak-docs-section">
         <h2>Environment Variables</h2>
         <p>
           Vite automatically exposes environment variables prefixed with <code>VITE_</code> to client bundles via <code>import.meta.env</code>. Raj-AuthKit requires the following Firebase Web App configuration parameters:
@@ -31,8 +35,8 @@ export function FirebaseSetupContent() {
         </ul>
       </section>
 
-      <section id="env-example">
-        <h2>Template Configuration (.env.example)</h2>
+      <section id="env-example" className="rak-docs-section">
+        <h2>Configuration Template (.env.example)</h2>
         <p>
           A template file is provided at the root of the repository as <code>.env.example</code>. To configure your local environment, copy the template to <code>.env</code> in the project root:
         </p>
@@ -59,8 +63,8 @@ VITE_FIREBASE_APP_ID=1:123456789012:web:abcdef1234567890`}
         />
       </section>
 
-      <section id="validation">
-        <h2>Automatic Configuration Validation</h2>
+      <section id="validation" className="rak-docs-section">
+        <h2>Automatic Environment Validation</h2>
         <p>
           During development, <code>src/firebase/config.js</code> automatically checks for the presence of the required environment variables:
         </p>
@@ -86,14 +90,11 @@ if (missingKeys.length > 0) {
         />
       </section>
 
-      <section id="security-warning">
+      <section id="security-warning" className="rak-docs-section">
         <h2>Security Best Practice</h2>
-        <div className="rak-callout rak-callout-warning">
-          <div className="rak-callout-title">Important Security Warning</div>
-          <p>
-            <strong>Never commit your <code>.env</code> file to version control.</strong> Verify that <code>.env</code> is included in your <code>.gitignore</code> file before staging git commits. While Firebase Web API keys are client-facing identifiers, keeping local configuration separate prevents unintentional credential leakage.
-          </p>
-        </div>
+        <Callout type="warning" title="Never Commit Credentials">
+          <strong>Never commit your <code>.env</code> file to version control.</strong> Verify that <code>.env</code> is included in your <code>.gitignore</code> file before staging git commits. While Firebase Web API keys are client-facing identifiers, keeping local configuration separate prevents unintentional credential leakage.
+        </Callout>
       </section>
 
       <div className="rak-docs-pager">

@@ -1,35 +1,84 @@
 import { useState, useEffect } from 'react'
-import { Link } from '../../router/index.jsx'
+import { Link, useRouter } from '../../router/index.jsx'
 import { DocsNav } from './DocsNav.jsx'
 import { OnThisPage } from './OnThisPage.jsx'
 import { Footer } from '../layout/Footer.jsx'
 
+const ROUTE_META = {
+  '/docs': { group: 'Introduction', title: 'Introduction' },
+  '/docs/introduction': { group: 'Introduction', title: 'Introduction' },
+  '/docs/getting-started': { group: 'Getting Started', title: 'Installation' },
+  '/docs/firebase': { group: 'Getting Started', title: 'Firebase Setup' },
+  '/docs/quick-start': { group: 'Getting Started', title: 'Quick Start' },
+  '/docs/signup': { group: 'Authentication', title: 'signup()' },
+  '/docs/login': { group: 'Authentication', title: 'login()' },
+  '/docs/logout': { group: 'Authentication', title: 'logout()' },
+  '/docs/use-auth': { group: 'Authentication', title: 'useAuth()' },
+  '/docs/protected-route': { group: 'Protected Routes', title: 'ProtectedRoute' },
+  '/docs/components': { group: 'UI Components', title: 'Components' },
+  '/docs/architecture': { group: 'Architecture', title: 'System Architecture' },
+  '/docs/security': { group: 'Security', title: 'Security Principles' },
+  '/docs/troubleshooting': { group: 'Troubleshooting', title: 'Troubleshooting' }
+}
+
 export function DocsLayout({ children, headings = [] }) {
+  const { currentPath } = useRouter()
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [scrollProgress, setScrollProgress] = useState(0)
 
+  // Track scroll position for header elevation and reading progress
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      const scrollTop = window.scrollY || document.documentElement.scrollTop
+      setIsScrolled(scrollTop > 15)
+
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight
+      if (docHeight > 0) {
+        const progress = Math.min(100, Math.max(0, (scrollTop / docHeight) * 100))
+        setScrollProgress(progress)
+      }
     }
+
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Lock body scroll and handle Escape key when mobile drawer is open
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && mobileDrawerOpen) {
         setMobileDrawerOpen(false)
       }
     }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+
+    if (mobileDrawerOpen) {
+      document.body.style.overflow = 'hidden'
+      window.addEventListener('keydown', handleKeyDown)
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [mobileDrawerOpen])
+
+  const normalizedPath = currentPath.replace(/\/$/, '') || '/docs'
+  const meta = ROUTE_META[normalizedPath] || ROUTE_META['/docs']
 
   return (
     <div className="rak-docs-page">
-      {/* Documentation Header */}
-      <header className={`rak-header ${isScrolled ? 'rak-header-scrolled' : ''}`}>
+      {/* 1. Reading Progress Bar */}
+      <div
+        className="rak-reading-progress"
+        style={{ width: `${scrollProgress}%` }}
+        aria-hidden="true"
+      />
+
+      {/* 2. Elevated Sticky Documentation Header */}
+      <header className={`rak-header rak-docs-header ${isScrolled ? 'rak-header-scrolled' : ''}`}>
         <div className="rak-container">
           <div className="rak-header-inner">
             {/* Logo / Brand with Docs Badge */}
@@ -38,19 +87,7 @@ export function DocsLayout({ children, headings = [] }) {
                 <span className="rak-brand-icon">R</span>
                 <span>RAJ-AUTHKIT</span>
               </Link>
-              <span
-                style={{
-                  fontSize: 'var(--rak-font-size-xs)',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  color: 'var(--rak-color-primary)',
-                  backgroundColor: 'var(--rak-color-primary-subtle)',
-                  border: '1px solid var(--rak-color-primary-border)',
-                  padding: '0.2rem 0.5rem',
-                  borderRadius: 'var(--rak-radius-sm)'
-                }}
-              >
+              <span className="rak-docs-brand-badge">
                 Docs
               </span>
             </div>
@@ -60,7 +97,7 @@ export function DocsLayout({ children, headings = [] }) {
               <Link href="/" className="rak-nav-link">
                 Home
               </Link>
-              <Link href="/docs" className="rak-nav-link" style={{ color: 'var(--rak-color-primary)', fontWeight: 600 }}>
+              <Link href="/docs" className="rak-nav-link rak-nav-link-active">
                 Documentation
               </Link>
               <Link href="/#playground" className="rak-nav-link">
@@ -91,70 +128,99 @@ export function DocsLayout({ children, headings = [] }) {
         </div>
       </header>
 
-      {/* Mobile Docs Sub-bar with Drawer Toggle */}
+      {/* 3. Mobile Documentation Bar with Category & Drawer Trigger */}
       <div className="rak-docs-mobile-bar">
         <button
           type="button"
           className="rak-docs-mobile-trigger"
-          onClick={() => setMobileDrawerOpen((prev) => !prev)}
+          onClick={() => setMobileDrawerOpen(true)}
           aria-expanded={mobileDrawerOpen}
-          aria-label="Toggle documentation navigation menu"
+          aria-label="Open documentation navigation menu"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <line x1="3" y1="12" x2="21" y2="12" />
             <line x1="3" y1="6" x2="21" y2="6" />
             <line x1="3" y1="18" x2="21" y2="18" />
           </svg>
-          <span>Documentation Menu</span>
+          <span>Menu</span>
         </button>
-        <span style={{ fontSize: 'var(--rak-font-size-xs)', color: 'var(--rak-color-text-muted)' }}>
-          Raj-AuthKit Docs
-        </span>
+
+        <div className="rak-docs-mobile-crumb">
+          <span className="rak-docs-mobile-crumb-group">{meta.group}</span>
+          <span className="rak-docs-mobile-crumb-sep">/</span>
+          <span className="rak-docs-mobile-crumb-title">{meta.title}</span>
+        </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* 4. Mobile Drawer Overlay & Sliding Panel */}
       {mobileDrawerOpen && (
-        <div
-          className="rak-docs-mobile-drawer"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Documentation Navigation"
-        >
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
-            <button
-              type="button"
-              onClick={() => setMobileDrawerOpen(false)}
-              className="rak-mobile-toggle"
-              aria-label="Close documentation menu"
-              style={{ display: 'flex' }}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
+        <div className="rak-drawer-root" role="dialog" aria-modal="true" aria-label="Documentation Navigation">
+          <div
+            className="rak-drawer-backdrop"
+            onClick={() => setMobileDrawerOpen(false)}
+            aria-hidden="true"
+          />
+          <div className="rak-docs-mobile-drawer">
+            <div className="rak-docs-mobile-drawer-header">
+              <span className="rak-docs-drawer-title">Documentation</span>
+              <button
+                type="button"
+                onClick={() => setMobileDrawerOpen(false)}
+                className="rak-mobile-toggle"
+                aria-label="Close documentation menu"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+            <div className="rak-docs-mobile-drawer-nav">
+              <DocsNav onNavigate={() => setMobileDrawerOpen(false)} />
+            </div>
           </div>
-          <DocsNav onNavigate={() => setMobileDrawerOpen(false)} />
         </div>
       )}
 
-      {/* 3-Column Docs Layout */}
+      {/* 5. Editorial 3-Column Documentation Layout */}
       <div className="rak-docs-layout">
-        {/* Left: Sidebar */}
-        <aside className="rak-docs-sidebar">
+        {/* Left: Desktop Sticky Sidebar */}
+        <aside className="rak-docs-sidebar" aria-label="Documentation Sidebar">
           <DocsNav />
         </aside>
 
-        {/* Center: Main Content */}
+        {/* Center: Main Editorial Content Container */}
         <main className="rak-docs-content">
-          {children}
+          {/* Breadcrumb Area */}
+          <nav className="rak-docs-breadcrumb" aria-label="Breadcrumb">
+            <ol className="rak-docs-breadcrumb-list">
+              <li>
+                <Link href="/docs" className="rak-docs-breadcrumb-link">
+                  Docs
+                </Link>
+              </li>
+              <li className="rak-docs-breadcrumb-separator" aria-hidden="true">/</li>
+              <li className="rak-docs-breadcrumb-group">
+                {meta.group}
+              </li>
+              <li className="rak-docs-breadcrumb-separator" aria-hidden="true">/</li>
+              <li className="rak-docs-breadcrumb-current" aria-current="page">
+                {meta.title}
+              </li>
+            </ol>
+          </nav>
+
+          {/* Dynamic Documentation Page Content */}
+          <div className="rak-docs-page-anim" key={currentPath}>
+            {children}
+          </div>
         </main>
 
-        {/* Right: On This Page */}
+        {/* Right: On This Page Table of Contents */}
         <OnThisPage headings={headings} />
       </div>
 
-      {/* Clean Footer */}
+      {/* 6. Footer */}
       <Footer />
     </div>
   )

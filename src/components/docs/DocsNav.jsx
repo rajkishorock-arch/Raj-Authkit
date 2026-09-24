@@ -16,42 +16,37 @@ export const DOCS_SECTIONS = [
     ]
   },
   {
-    group: 'Authentication',
+    group: 'Authentication API',
     items: [
-      { id: 'signup', title: 'Signup', path: '/docs/signup' },
-      { id: 'login', title: 'Login', path: '/docs/login' },
-      { id: 'logout', title: 'Logout', path: '/docs/logout' },
-      { id: 'use-auth', title: 'useAuth Hook', path: '/docs/use-auth' }
+      { id: 'signup', title: 'signup()', path: '/docs/signup' },
+      { id: 'login', title: 'login()', path: '/docs/login' },
+      { id: 'logout', title: 'logout()', path: '/docs/logout' },
+      { id: 'use-auth', title: 'useAuth() Hook', path: '/docs/use-auth' }
     ]
   },
   {
-    group: 'Protected Routes',
+    group: 'Route Security',
     items: [
-      { id: 'protected-route', title: 'ProtectedRoute', path: '/docs/protected-route' }
+      { id: 'protected-route', title: 'ProtectedRoute Guard', path: '/docs/protected-route' }
     ]
   },
   {
-    group: 'UI Components',
+    group: 'UI System',
     items: [
-      { id: 'components', title: 'Components', path: '/docs/components' }
+      { id: 'components', title: 'Component Playground', path: '/docs/components' }
     ]
   },
   {
-    group: 'Architecture',
+    group: 'System Design',
     items: [
-      { id: 'architecture', title: 'Architecture', path: '/docs/architecture' }
+      { id: 'architecture', title: 'Architecture Diagram', path: '/docs/architecture' },
+      { id: 'security', title: 'Security Principles', path: '/docs/security' }
     ]
   },
   {
-    group: 'Security',
+    group: 'Support',
     items: [
-      { id: 'security', title: 'Security', path: '/docs/security' }
-    ]
-  },
-  {
-    group: 'Troubleshooting',
-    items: [
-      { id: 'troubleshooting', title: 'Troubleshooting', path: '/docs/troubleshooting' }
+      { id: 'troubleshooting', title: 'Troubleshooting Guide', path: '/docs/troubleshooting' }
     ]
   }
 ]
@@ -59,7 +54,6 @@ export const DOCS_SECTIONS = [
 export function DocsNav({ onNavigate }) {
   const { currentPath } = useRouter()
 
-  // Helper to determine if item is active: /docs matches introduction, otherwise exact match
   const isItemActive = (itemPath) => {
     if (itemPath === '/docs') {
       return currentPath === '/docs' || currentPath === '/docs/' || currentPath === '/docs/introduction'
@@ -68,21 +62,24 @@ export function DocsNav({ onNavigate }) {
   }
 
   return (
-    <nav className="rak-docs-nav-menu" aria-label="Documentation Sidebar">
+    <nav className="rak-docs-nav-menu" aria-label="Documentation Categories">
       {DOCS_SECTIONS.map((section) => (
         <div key={section.group} className="rak-docs-group">
-          <div className="rak-docs-group-title">{section.group}</div>
+          <div className="rak-docs-group-title">
+            <span>{section.group}</span>
+          </div>
           <ul className="rak-docs-nav-list">
             {section.items.map((item) => {
               const active = isItemActive(item.path)
               return (
-                <li key={item.id}>
+                <li key={item.id} className="rak-docs-nav-wrapper">
                   <Link
                     href={item.path}
                     className={`rak-docs-nav-item ${active ? 'active' : ''}`}
                     onClick={() => onNavigate && onNavigate()}
                   >
-                    {item.title}
+                    <span className="rak-docs-nav-indicator" aria-hidden="true" />
+                    <span className="rak-docs-nav-text">{item.title}</span>
                   </Link>
                 </li>
               )

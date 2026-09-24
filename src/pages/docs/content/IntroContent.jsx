@@ -1,4 +1,5 @@
 import { CodeBlock } from '../../../components/docs/CodeBlock.jsx'
+import { Callout } from '../../../components/docs/Callout.jsx'
 import { Link } from '../../../router/index.jsx'
 
 export const introHeadings = [
@@ -12,12 +13,15 @@ export const introHeadings = [
 export function IntroContent() {
   return (
     <article className="rak-docs-article">
-      <h1>Raj-AuthKit</h1>
-      <p className="rak-docs-lead">
-        A modular Firebase authentication toolkit for modern React applications.
-      </p>
+      <header className="rak-docs-hero">
+        <span className="rak-section-badge">Documentation</span>
+        <h1>Raj-AuthKit</h1>
+        <p className="rak-docs-lead">
+          A modular Firebase authentication toolkit and accessible design system for modern React applications.
+        </p>
+      </header>
 
-      <section id="overview">
+      <section id="overview" className="rak-docs-section">
         <h2>Overview</h2>
         <p>
           Raj-AuthKit is an open-source architectural foundation designed to provide production-grade Firebase Authentication in React 18+ applications without unnecessary runtime dependencies or heavyweight UI frameworks.
@@ -27,7 +31,7 @@ export function IntroContent() {
         </p>
       </section>
 
-      <section id="problem-solved">
+      <section id="problem-solved" className="rak-docs-section">
         <h2>The Problem It Solves</h2>
         <p>
           Setting up Firebase Authentication in new React projects typically requires juggling repetitive boilerplate across multiple application concerns:
@@ -43,7 +47,7 @@ export function IntroContent() {
         </p>
       </section>
 
-      <section id="architecture">
+      <section id="architecture" className="rak-docs-section">
         <h2>Core Architecture</h2>
         <p>
           Data and state flow unidirectionally through distinct, decoupled layers:
@@ -68,7 +72,7 @@ Application UI & Consumer Components`}
         </p>
       </section>
 
-      <section id="features">
+      <section id="features" className="rak-docs-section">
         <h2>Current Capabilities</h2>
         <p>
           The current repository foundation implements the following verified features:
@@ -84,20 +88,19 @@ Application UI & Consumer Components`}
         </ul>
       </section>
 
-      <section id="planned">
+      <section id="planned" className="rak-docs-section">
         <h2>Future Roadmap</h2>
-        <div className="rak-callout">
-          <div className="rak-callout-title">Planned Features (Step 8+)</div>
+        <Callout type="info" title="Planned Features (Step 8+)">
           <p>
             The following capabilities are in design and will be introduced in subsequent milestones:
           </p>
-          <ul style={{ marginTop: '0.5rem', marginBottom: 0 }}>
+          <ul style={{ marginTop: '0.5rem', marginBottom: 0, paddingLeft: '1.25rem' }}>
             <li>OAuth Social Authentication (Google, GitHub)</li>
             <li>Password Reset flow and email verification actions</li>
             <li>Firestore user profile synchronization</li>
             <li>Bundled npm distribution (library build mode)</li>
           </ul>
-        </div>
+        </Callout>
       </section>
 
       <div className="rak-docs-pager">

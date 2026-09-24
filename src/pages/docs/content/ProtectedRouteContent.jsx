@@ -1,10 +1,12 @@
 import { CodeBlock } from '../../../components/docs/CodeBlock.jsx'
+import { Callout } from '../../../components/docs/Callout.jsx'
 import { Link } from '../../../router/index.jsx'
 
 export const protectedRouteHeadings = [
+  { id: 'purpose', title: 'Purpose & Overview' },
   { id: 'component-api', title: 'Component API' },
-  { id: 'usage-example', title: 'Usage Example' },
-  { id: 'flicker-prevention', title: 'Flicker-Free Loading Architecture' },
+  { id: 'usage-example', title: 'Implementation Example' },
+  { id: 'flicker-prevention', title: 'Flicker-Free Anti-Flashing Logic' },
   { id: 'custom-loading', title: 'Custom Loading Fallback' },
   { id: 'listener-efficiency', title: 'Listener Efficiency' }
 ]
@@ -12,47 +14,60 @@ export const protectedRouteHeadings = [
 export function ProtectedRouteContent() {
   return (
     <article className="rak-docs-article">
-      <h1>ProtectedRoute</h1>
-      <p className="rak-docs-lead">
-        Framework-agnostic route guard that prevents layout flickers and controls access to private views.
-      </p>
+      <header className="rak-docs-hero">
+        <span className="rak-section-badge">Route Security</span>
+        <h1>ProtectedRoute</h1>
+        <p className="rak-docs-lead">
+          Framework-agnostic route guard component that prevents layout flickers and guards private application views.
+        </p>
+      </header>
 
-      <section id="component-api">
+      {/* 1. Purpose */}
+      <section id="purpose" className="rak-docs-section">
+        <h2>Purpose & Overview</h2>
+        <p>
+          The <code>&lt;ProtectedRoute&gt;</code> guard guarantees that sensitive application dashboards or account screens are only rendered when a valid Firebase user session is present.
+        </p>
+      </section>
+
+      {/* 2. Component API */}
+      <section id="component-api" className="rak-docs-section">
         <h2>Component API</h2>
-        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.5rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', margin: '1.25rem 0', fontSize: 'var(--rak-font-size-sm)' }}>
           <thead>
             <tr style={{ borderBottom: '2px solid var(--rak-color-border-subtle)', textAlign: 'left' }}>
-              <th style={{ padding: '0.75rem' }}>Prop</th>
-              <th style={{ padding: '0.75rem' }}>Type</th>
-              <th style={{ padding: '0.75rem' }}>Default</th>
-              <th style={{ padding: '0.75rem' }}>Description</th>
+              <th style={{ padding: '0.65rem' }}>Prop</th>
+              <th style={{ padding: '0.65rem' }}>Type</th>
+              <th style={{ padding: '0.65rem' }}>Default</th>
+              <th style={{ padding: '0.65rem' }}>Description</th>
             </tr>
           </thead>
           <tbody>
             <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.75rem' }}><code>children</code></td>
-              <td style={{ padding: '0.75rem' }}><code>ReactNode</code></td>
-              <td style={{ padding: '0.75rem' }}><em>Required</em></td>
-              <td style={{ padding: '0.75rem' }}>Private content rendered exclusively when authenticated.</td>
+              <td style={{ padding: '0.65rem' }}><code>children</code></td>
+              <td style={{ padding: '0.65rem' }}><code>ReactNode</code></td>
+              <td style={{ padding: '0.65rem' }}><em>Required</em></td>
+              <td style={{ padding: '0.65rem' }}>Private content rendered exclusively when authenticated.</td>
             </tr>
             <tr style={{ borderBottom: '1px solid var(--rak-color-border-subtle)' }}>
-              <td style={{ padding: '0.75rem' }}><code>fallback</code></td>
-              <td style={{ padding: '0.75rem' }}><code>ReactNode</code></td>
-              <td style={{ padding: '0.75rem' }}><code>null</code></td>
-              <td style={{ padding: '0.75rem' }}>Content rendered when unauthenticated (e.g. <code>&lt;LoginForm /&gt;</code>).</td>
+              <td style={{ padding: '0.65rem' }}><code>fallback</code></td>
+              <td style={{ padding: '0.65rem' }}><code>ReactNode</code></td>
+              <td style={{ padding: '0.65rem' }}><code>null</code></td>
+              <td style={{ padding: '0.65rem' }}>Content rendered when unauthenticated (e.g. <code>&lt;LoginForm /&gt;</code>).</td>
             </tr>
             <tr>
-              <td style={{ padding: '0.75rem' }}><code>loadingFallback</code></td>
-              <td style={{ padding: '0.75rem' }}><code>ReactNode</code></td>
-              <td style={{ padding: '0.75rem' }}>Default Spinner</td>
-              <td style={{ padding: '0.75rem' }}>Custom loading view shown while Firebase inspects local tokens.</td>
+              <td style={{ padding: '0.65rem' }}><code>loadingFallback</code></td>
+              <td style={{ padding: '0.65rem' }}><code>ReactNode</code></td>
+              <td style={{ padding: '0.65rem' }}>Default Spinner</td>
+              <td style={{ padding: '0.65rem' }}>Custom loading view shown while Firebase inspects local tokens.</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-      <section id="usage-example">
-        <h2>Usage Example</h2>
+      {/* 3. Implementation Example */}
+      <section id="usage-example" className="rak-docs-section">
+        <h2>Implementation Example</h2>
         <p>Guarding an application dashboard:</p>
         <CodeBlock
           language="jsx"
@@ -71,8 +86,9 @@ export function App() {
         />
       </section>
 
-      <section id="flicker-prevention">
-        <h2>Flicker-Free Loading Architecture</h2>
+      {/* 4. Flicker-Free Anti-Flashing Logic */}
+      <section id="flicker-prevention" className="rak-docs-section">
+        <h2>Flicker-Free Anti-Flashing Logic</h2>
         <p>
           A common bug in client-side authentication guards is the <em>auth flicker</em>: on page refresh, the user is temporarily treated as logged out while Firebase checks credentials, causing a jarring login form to flash for 200ms before snapping back to the private dashboard.
         </p>
@@ -86,7 +102,8 @@ export function App() {
         </ol>
       </section>
 
-      <section id="custom-loading">
+      {/* 5. Custom Loading Fallback */}
+      <section id="custom-loading" className="rak-docs-section">
         <h2>Custom Loading Fallback</h2>
         <p>You can provide branded skeleton loaders using the <code>loadingFallback</code> prop:</p>
         <CodeBlock
@@ -100,21 +117,22 @@ export function App() {
         />
       </section>
 
-      <section id="listener-efficiency">
+      {/* 6. Listener Efficiency */}
+      <section id="listener-efficiency" className="rak-docs-section">
         <h2>Listener Efficiency</h2>
-        <p>
+        <Callout type="info" title="Zero Redundant Handshakes">
           <code>&lt;ProtectedRoute&gt;</code> does not attach its own Firebase listeners. Instead, it consumes the shared <code>AuthContext</code> via <code>useAuth()</code>. Even if your application nests multiple protected routes, only a single Firebase listener is active.
-        </p>
+        </Callout>
       </section>
 
       <div className="rak-docs-pager">
         <Link href="/docs/use-auth" className="rak-docs-pager-btn">
           <span className="rak-docs-pager-label">Previous</span>
-          <span className="rak-docs-pager-title">← useAuth Hook</span>
+          <span className="rak-docs-pager-title">← useAuth() Hook</span>
         </Link>
         <Link href="/docs/components" className="rak-docs-pager-btn">
           <span className="rak-docs-pager-label">Next</span>
-          <span className="rak-docs-pager-title">UI Components →</span>
+          <span className="rak-docs-pager-title">Component Playground →</span>
         </Link>
       </div>
     </article>

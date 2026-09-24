@@ -1,4 +1,5 @@
 import { CodeBlock } from '../../../components/docs/CodeBlock.jsx'
+import { Callout } from '../../../components/docs/Callout.jsx'
 import { Link } from '../../../router/index.jsx'
 
 export const installationHeadings = [
@@ -11,12 +12,15 @@ export const installationHeadings = [
 export function InstallationContent() {
   return (
     <article className="rak-docs-article">
-      <h1>Installation</h1>
-      <p className="rak-docs-lead">
-        Setting up Raj-AuthKit in your local development environment.
-      </p>
+      <header className="rak-docs-hero">
+        <span className="rak-section-badge">Getting Started</span>
+        <h1>Installation</h1>
+        <p className="rak-docs-lead">
+          Setting up the Raj-AuthKit development repository and verifying prerequisites.
+        </p>
+      </header>
 
-      <section id="prerequisites">
+      <section id="prerequisites" className="rak-docs-section">
         <h2>Prerequisites</h2>
         <p>Ensure your environment satisfies the baseline technical requirements:</p>
         <ul>
@@ -26,7 +30,7 @@ export function InstallationContent() {
         </ul>
       </section>
 
-      <section id="repo-usage">
+      <section id="repo-usage" className="rak-docs-section">
         <h2>Repository Usage (Current)</h2>
         <p>
           Raj-AuthKit is currently organized as an open-source source kit. To run or integrate the codebase locally, clone the repository and install dependencies:
@@ -52,7 +56,7 @@ npm run dev`}
         />
       </section>
 
-      <section id="dependencies">
+      <section id="dependencies" className="rak-docs-section">
         <h2>Project Dependencies</h2>
         <p>
           Raj-AuthKit relies strictly on lightweight core libraries without unnecessary UI dependencies:
@@ -74,14 +78,11 @@ npm run dev`}
         />
       </section>
 
-      <section id="npm-distribution">
+      <section id="npm-distribution" className="rak-docs-section">
         <h2>npm Distribution (Coming Soon)</h2>
-        <div className="rak-callout">
-          <div className="rak-callout-title">Planned Packaging (Step 8+)</div>
-          <p>
-            Vite library bundling and distribution via <code>npm install raj-authkit</code> will be released in an upcoming milestone. In the current release, import modules directly from the project directory.
-          </p>
-        </div>
+        <Callout type="info" title="Planned Packaging (Step 8+)">
+          Vite library bundling and standalone package distribution via <code>npm install raj-authkit</code> will be released in an upcoming milestone. In the current release, import modules directly from the project directory.
+        </Callout>
       </section>
 
       <div className="rak-docs-pager">

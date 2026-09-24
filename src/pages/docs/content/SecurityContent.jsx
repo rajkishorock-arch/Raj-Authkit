@@ -1,4 +1,5 @@
 import { CodeBlock } from '../../../components/docs/CodeBlock.jsx'
+import { Callout } from '../../../components/docs/Callout.jsx'
 import { Link } from '../../../router/index.jsx'
 
 export const securityHeadings = [
@@ -12,12 +13,15 @@ export const securityHeadings = [
 export function SecurityContent() {
   return (
     <article className="rak-docs-article">
-      <h1>Security Principles</h1>
-      <p className="rak-docs-lead">
-        Architectural security patterns and operational guidelines implemented in Raj-AuthKit.
-      </p>
+      <header className="rak-docs-hero">
+        <span className="rak-section-badge">Security</span>
+        <h1>Security Principles</h1>
+        <p className="rak-docs-lead">
+          Core architectural security patterns, data boundaries, and operational guidelines implemented in Raj-AuthKit.
+        </p>
+      </header>
 
-      <section id="credential-storage">
+      <section id="credential-storage" className="rak-docs-section">
         <h2>Credential & Token Storage</h2>
         <p>
           Raj-AuthKit delegates credential encryption, password hashing, and token issuance directly to Google Firebase Authentication. The client library does not store raw passwords in memory, <code>localStorage</code>, or plain cookies.
@@ -27,7 +31,7 @@ export function SecurityContent() {
         </p>
       </section>
 
-      <section id="central-state">
+      <section id="central-state" className="rak-docs-section">
         <h2>Single-Listener State Management</h2>
         <p>
           Duplicating authentication event listeners across different components creates synchronization races and memory leaks. Raj-AuthKit centralizes authentication state in <code>AuthContext</code>:
@@ -39,20 +43,17 @@ export function SecurityContent() {
         </ul>
       </section>
 
-      <section id="route-protection">
+      <section id="route-protection" className="rak-docs-section">
         <h2>Client-Side Route Protection</h2>
         <p>
           While <code>&lt;ProtectedRoute&gt;</code> prevents unauthenticated users from rendering private React UI views, client-side route guards do not replace backend security rules.
         </p>
-        <div className="rak-callout rak-callout-warning">
-          <div className="rak-callout-title">Backend Security Enforcement</div>
-          <p>
-            Always protect backend APIs, database read/writes (e.g. Firebase Security Rules), and cloud functions using server-side token verification. Client-side guards protect user experience; backend rules protect data.
-          </p>
-        </div>
+        <Callout type="warning" title="Backend Security Enforcement">
+          Always protect backend APIs, database read/writes (e.g. Firebase Security Rules), and cloud functions using server-side token verification. Client-side guards protect user experience; backend rules protect data.
+        </Callout>
       </section>
 
-      <section id="privacy-masking">
+      <section id="privacy-masking" className="rak-docs-section">
         <h2>User Identity & UID Exposure</h2>
         <p>
           Internal database identifiers such as Firebase UIDs and full personal email addresses should never be unnecessarily exposed in public product interfaces or marketing demonstrations.
@@ -62,7 +63,7 @@ export function SecurityContent() {
         </p>
       </section>
 
-      <section id="env-separation">
+      <section id="env-separation" className="rak-docs-section">
         <h2>Environment Variable Hygiene</h2>
         <p>
           Never commit production API keys or environment secrets to git repositories. Always use <code>.env.example</code> with placeholder values for source control, and maintain local <code>.env</code> files in <code>.gitignore</code>.
@@ -72,11 +73,11 @@ export function SecurityContent() {
       <div className="rak-docs-pager">
         <Link href="/docs/architecture" className="rak-docs-pager-btn">
           <span className="rak-docs-pager-label">Previous</span>
-          <span className="rak-docs-pager-title">← Architecture</span>
+          <span className="rak-docs-pager-title">← System Architecture</span>
         </Link>
         <Link href="/docs/troubleshooting" className="rak-docs-pager-btn">
           <span className="rak-docs-pager-label">Next</span>
-          <span className="rak-docs-pager-title">Troubleshooting →</span>
+          <span className="rak-docs-pager-title">Troubleshooting Guide →</span>
         </Link>
       </div>
     </article>
