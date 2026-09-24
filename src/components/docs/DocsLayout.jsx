@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useRouter } from '../../router/index.jsx'
 import { DocsNav } from './DocsNav.jsx'
-import { OnThisPage } from './OnThisPage.jsx'
 import { Footer } from '../layout/Footer.jsx'
 
 const ROUTE_META = {
@@ -77,9 +76,9 @@ export function DocsLayout({ children, headings = [] }) {
         aria-hidden="true"
       />
 
-      {/* 2. Elevated Sticky Documentation Header */}
+      {/* 2. Elevated Full-Width Sticky Documentation Header */}
       <header className={`rak-header rak-docs-header ${isScrolled ? 'rak-header-scrolled' : ''}`}>
-        <div className="rak-container">
+        <div className="rak-docs-header-fluid">
           <div className="rak-header-inner">
             {/* Logo / Brand with Docs Badge */}
             <div className="rak-docs-header-brand-wrap">
@@ -92,7 +91,7 @@ export function DocsLayout({ children, headings = [] }) {
               </span>
             </div>
 
-            {/* Desktop Navigation (Hidden on mobile) */}
+            {/* Desktop Navigation (Hidden on tablet & mobile <= 1023px) */}
             <nav className="rak-nav-desktop" aria-label="Documentation Navigation">
               <Link href="/" className="rak-nav-link">
                 Home
@@ -105,7 +104,7 @@ export function DocsLayout({ children, headings = [] }) {
               </Link>
             </nav>
 
-            {/* Desktop Header Actions (Hidden on mobile) */}
+            {/* Desktop Header Actions (Hidden on tablet & mobile <= 1023px) */}
             <div className="rak-header-actions">
               <a
                 href="https://github.com/rajkishorock-arch/Raj-Authkit"
@@ -125,7 +124,7 @@ export function DocsLayout({ children, headings = [] }) {
               </Link>
             </div>
 
-            {/* Mobile Hamburger Trigger (Visible <= 960px) */}
+            {/* Mobile Hamburger Trigger (Visible <= 1023px) */}
             <button
               type="button"
               className="rak-docs-hamburger-btn"
@@ -201,14 +200,14 @@ export function DocsLayout({ children, headings = [] }) {
         </div>
       )}
 
-      {/* 4. Documentation Layout */}
+      {/* 4. Documentation Layout (Two columns: Column 1 = Sidebar, Column 2 = Main Content) */}
       <div className="rak-docs-layout">
-        {/* Left: Desktop Sticky Sidebar (Hidden <= 960px) */}
+        {/* Left: Desktop Sticky Sidebar (Column 1, hidden <= 1023px) */}
         <aside className="rak-docs-sidebar" aria-label="Documentation Sidebar">
           <DocsNav />
         </aside>
 
-        {/* Center: Main Editorial Content Container */}
+        {/* Center/Right: Main Documentation Content (Column 2, full width <= 1023px) */}
         <main className="rak-docs-content">
           {/* Breadcrumb Area (Deduplicated) */}
           <nav className="rak-docs-breadcrumb" aria-label="Breadcrumb">
@@ -238,9 +237,6 @@ export function DocsLayout({ children, headings = [] }) {
             {children}
           </div>
         </main>
-
-        {/* Right: On This Page Table of Contents (Hidden <= 960px) */}
-        <OnThisPage headings={headings} />
       </div>
 
       {/* 5. Footer */}
