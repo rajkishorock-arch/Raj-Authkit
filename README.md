@@ -6,12 +6,12 @@ Raj-AuthKit is an open-source project intended to become a reusable, lightweight
 Raj-AuthKit is designed to simplify user authentication and user profile management in React applications using Firebase Authentication and Firestore. It will eventually be distributed as a reusable package on npm and maintained as a public open-source repository on GitHub.
 
 ## Current Development Status
-- **Current Step:** Step 7 — Protected Routes / Auth Guard
+- **Current Step:** Step 8 — Package Architecture & Distribution Readiness
 - **Open Source:** Yes (MIT Licensed)
-- **Protected Routes & Auth Guard:** Created framework-agnostic, reusable `ProtectedRoute` component in `src/components/auth/ProtectedRoute.jsx` that guards protected application content using `useAuth()` as the single source of truth. Prevents auth flicker during initial session resolution, renders children when authenticated, and displays customizable unauthenticated fallback views.
-- **Pending Future Steps:** Social authentication (Google), password reset/management, Firestore user profile integration, and npm package bundling.
-- **npm Status:** The project is **not published to npm yet** (package publishing will happen in a future step).
-- The base project structure with React, Vite, and JavaScript is cleanly initialized.
+- **Package Architecture:** Dual ESM (`dist/raj-authkit.js`) and CommonJS (`dist/raj-authkit.cjs`) library builds with standalone component stylesheet (`dist/style.css`).
+- **npm Status:** **Pending registry release** (package is marked `"private": true` until the dedicated npm publishing step). Do not attempt to install from the public npm registry yet.
+- **Library Build Command:** `npm run build:package`
+- **Website Build Command:** `npm run build`
 
 ## Environment Variables Configuration
 
@@ -51,11 +51,133 @@ Start the Vite development server:
 npm run dev
 ```
 
-Build for production:
-
 ```bash
 npm run build
 ```
+
+Build library package for distribution:
+
+```bash
+npm run build:package
+```
+
+## Package Usage (npm)
+
+> **Note:** The package is currently in preparation for npm distribution (`"private": true`) and has not yet been published to the registry. The examples below demonstrate how consumers will use the library once published.
+
+### 1. Installation
+
+```bash
+npm install raj-authkit firebase
+```
+
+#### Peer Dependencies
+Raj-AuthKit requires the following peer dependencies in the consumer project:
+- `react` (`>=18.0.0`)
+- `react-dom` (`>=18.0.0`)
+- `firebase` (`^10.0.0 || ^11.0.0 || ^12.0.0`)
+
+### 2. Import Styles (Optional for UI Components)
+
+If using the pre-built UI components, import the CSS stylesheet once at the entry point of your application:
+
+```javascript
+import 'raj-authkit/style.css'
+```
+
+### 3. Initialize Firebase & Wrap with AuthProvider
+
+You can initialize Firebase by either:
+- Passing your config to `initAuth(config)`:
+
+```jsx
+import { initAuth, AuthProvider } from 'raj-authkit'
+
+initAuth({
+  apiKey: "AIzaSy...",
+  authDomain: "your-app.firebaseapp.com",
+  projectId: "your-app",
+  storageBucket: "your-app.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abcdef"
+})
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <YourAppContent />
+    </AuthProvider>
+  )
+}
+```
+
+- Or passing `config` directly to `<AuthProvider config={firebaseConfig}>`:
+
+```jsx
+import { AuthProvider } from 'raj-authkit'
+
+export default function App() {
+  return (
+    <AuthProvider config={firebaseConfig}>
+      <YourAppContent />
+    </AuthProvider>
+  )
+}
+```
+
+### 4. Headless Auth Hook (`useAuth`)
+
+```jsx
+import { useAuth } from 'raj-authkit'
+
+function UserProfile() {
+  const { user, loading } = useAuth()
+
+  if (loading) return <p>Loading session...</p>
+  if (!user) return <p>Please log in.</p>
+
+  return <p>Signed in as: {user.email}</p>
+}
+```
+
+### 5. Pre-Built Authentication Forms
+
+```jsx
+import { LoginForm, SignupForm } from 'raj-authkit'
+
+function AuthPage() {
+  return (
+    <LoginForm
+      onSuccess={(userCredential) => console.log('Logged in:', userCredential.user.email)}
+      onSwitchToSignup={() => console.log('Navigate to signup')}
+    />
+  )
+}
+```
+
+### 6. Protected Route Guard
+
+```jsx
+import { ProtectedRoute } from 'raj-authkit'
+
+function DashboardPage() {
+  return (
+    <ProtectedRoute fallback={<p>Access restricted. Please log in.</p>}>
+      <DashboardContent />
+    </ProtectedRoute>
+  )
+}
+```
+
+### 7. Public API Reference
+
+| Category | Exports |
+| :--- | :--- |
+| **Core** | `AuthProvider`, `AuthContext`, `useAuth`, `authService`, `signup`, `login`, `logout`, `auth`, `initAuth`, `initFirebase` |
+| **Route Guard** | `ProtectedRoute` |
+| **Auth UI** | `LoginForm`, `SignupForm`, `AuthCard` |
+| **UI Primitives** | `Button`, `Input`, `PasswordInput`, `Alert`, `Spinner` |
+| **Utilities** | `getAuthErrorMessage` |
 
 ## Project Structure
 

@@ -1,0 +1,23 @@
+# Prevent any environment files or secrets from being packaged
+.env
+.env.*
+*.local
+*.log
+
+# Source files (bundled into dist/)
+src/
+public/
+index.html
+
+# Configuration & tooling
+vite.config.js
+vite.config.lib.js
+.git*
+.idea/
+.vscode/
+
+# Build artifacts not meant for consumers
+dist-site/
+dist/.gitkeep
+*.webp
+*.png

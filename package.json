@@ -2,12 +2,32 @@
   "name": "raj-authkit",
   "private": true,
   "version": "0.1.0",
+  "description": "A lightweight, modular Firebase authentication toolkit for React applications.",
   "type": "module",
-  "license": "MIT",
+  "main": "./dist/raj-authkit.cjs",
+  "module": "./dist/raj-authkit.js",
+  "exports": {
+    ".": {
+      "import": "./dist/raj-authkit.js",
+      "require": "./dist/raj-authkit.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:package": "vite build --config vite.config.lib.js",
     "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "firebase": "^10.0.0 || ^11.0.0 || ^12.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "dependencies": {
     "firebase": "^12.19.0",
@@ -17,5 +37,6 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^5.4.14"
-  }
+  },
+  "license": "MIT"
 }
