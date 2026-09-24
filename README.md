@@ -6,10 +6,10 @@ Raj-AuthKit is an open-source project intended to become a reusable, lightweight
 Raj-AuthKit is designed to simplify user authentication and user profile management in React applications using Firebase Authentication and Firestore. It will eventually be distributed as a reusable package on npm and maintained as a public open-source repository on GitHub.
 
 ## Current Development Status
-- **Current Step:** Step 3 — Authentication Service Foundation
+- **Current Step:** Step 4 — Auth State Management
 - **Open Source:** Yes (MIT Licensed)
-- **Authentication Service Status:** Core authentication functions (`signup`, `login`, `logout`) are implemented in `src/auth/authService.js` using Firebase Authentication SDK.
-- **Pending Future Steps:** Authentication UI (forms, dialogs, pages) and global auth state management (`onAuthStateChanged`, `AuthProvider`, `useAuth`) are **not implemented yet** and are scheduled for upcoming steps.
+- **Auth State Management:** Implemented via `AuthProvider` and `useAuth()` hook in `src/auth/`, subscribing to Firebase `onAuthStateChanged()`. Exposes current `user` and `loading` states with automatic listener cleanup.
+- **Pending Future Steps:** Authentication UI (forms, login/signup pages, dialogs, logout buttons) and social auth / profile management are **not implemented yet** and are scheduled for upcoming steps.
 - **npm Status:** The project is **not published to npm yet** (package publishing will happen in a future step).
 - The base project structure with React, Vite, and JavaScript is cleanly initialized.
 
@@ -84,7 +84,7 @@ Raj-AuthKit/
 - [x] **Step 1: Project Foundation** (React + Vite setup, basic structure)
 - [x] **Step 2: Firebase Setup & Configuration** (Firebase SDK setup, environment variables)
 - [x] **Step 3: Authentication Service Foundation** (signup, login, logout auth service)
-- [ ] **Step 4: Core Auth Context & Provider** (Auth state listener, context, useAuth)
+- [x] **Step 4: Core Auth Context & Provider** (Auth state listener, context, useAuth)
 - [ ] **Step 5: Social Authentication** (Google sign-in provider)
 - [ ] **Step 6: Password Management & Verification** (Password reset, email verification)
 - [ ] **Step 7: Firestore User Profile Integration** (User documents, roles)
