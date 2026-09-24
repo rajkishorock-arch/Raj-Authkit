@@ -81,12 +81,20 @@ export function ArchitectureContent() {
   return (
     <article className="rak-docs-article">
       <header className="rak-docs-hero">
-        <span className="rak-section-badge">System Design</span>
+        <span className="rak-docs-eyebrow">DOCUMENTATION / ARCHITECTURE</span>
         <h1>System Architecture</h1>
         <p className="rak-docs-lead">
           A layered, unidirectional data architecture designed for maintainability, strict separation of concerns, and zero unnecessary dependencies.
         </p>
       </header>
+
+      {/* 1. What it does */}
+      <section id="what-it-does" className="rak-docs-section">
+        <h2>What it does</h2>
+        <p>
+          Raj-AuthKit decomposes client authentication into distinct, single-responsibility layers. Data and session states flow strictly in one direction: from Firebase SDK network endpoints down to your React presentation components.
+        </p>
+      </section>
 
       {/* Interactive Visual Architecture Diagram */}
       <section id="interactive-diagram" className="rak-docs-section">
@@ -302,6 +310,16 @@ export async function logout() {
         <Callout type="important" title="Key Architectural Takeaway">
           By isolating Firebase SDK primitives into <code>authService.js</code>, reactive state into <code>AuthContext.jsx</code>, and route checks into <code>ProtectedRoute.jsx</code>, your application avoids tight coupling. You can replace UI components, re-style forms, or update security rules without touching core authentication mechanisms.
         </Callout>
+      </section>
+
+      {/* Related */}
+      <section id="related" className="rak-docs-section">
+        <h2>Related</h2>
+        <ul>
+          <li><Link href="/docs/security">Security Principles</Link> — Storage safety and operational guidelines</li>
+          <li><Link href="/docs/use-auth">useAuth() Hook</Link> — Reactive consumer state interface</li>
+          <li><Link href="/docs/protected-route">ProtectedRoute</Link> — Declarative client route guard</li>
+        </ul>
       </section>
 
       <div className="rak-docs-pager">

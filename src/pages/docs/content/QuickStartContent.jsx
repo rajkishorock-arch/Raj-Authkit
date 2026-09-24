@@ -3,31 +3,52 @@ import { Callout } from '../../../components/docs/Callout.jsx'
 import { Link } from '../../../router/index.jsx'
 
 export const quickStartHeadings = [
+  { id: 'what-it-does', title: 'What it does' },
   { id: 'step-1', title: '1. Configure Environment' },
   { id: 'step-2', title: '2. Mount AuthProvider' },
   { id: 'step-3', title: '3. Render Forms' },
   { id: 'step-4', title: '4. Read State with useAuth()' },
-  { id: 'step-5', title: '5. Guard Routes with ProtectedRoute' }
+  { id: 'step-5', title: '5. Guard Routes' },
+  { id: 'notes', title: 'Notes' },
+  { id: 'related', title: 'Related' }
 ]
 
 export function QuickStartContent() {
   return (
     <article className="rak-docs-article">
       <header className="rak-docs-hero">
-        <span className="rak-section-badge">Getting Started</span>
+        <span className="rak-docs-eyebrow">DOCUMENTATION / GETTING STARTED</span>
         <h1>Quick Start</h1>
         <p className="rak-docs-lead">
           Integrate Raj-AuthKit into a React application in five straightforward, production-ready steps.
         </p>
       </header>
 
-      <section id="step-1" className="rak-docs-section">
-        <h2>1. Configure Environment</h2>
+      {/* 1. What it does */}
+      <section id="what-it-does" className="rak-docs-section">
+        <h2>What it does</h2>
         <p>
-          Ensure your <code>.env</code> file is created with valid Firebase credentials as described in the <Link href="/docs/firebase">Firebase Setup guide</Link>.
+          This guide demonstrates how to mount the global <code>&lt;AuthProvider&gt;</code>, render pre-built authentication forms, consume reactive session state with <code>useAuth()</code>, and secure private views with <code>&lt;ProtectedRoute&gt;</code>.
         </p>
       </section>
 
+      {/* 2. Configure Environment */}
+      <section id="step-1" className="rak-docs-section">
+        <h2>1. Configure Environment</h2>
+        <p>
+          Ensure your <code>.env</code> file is created with valid Firebase credentials as described in the <Link href="/docs/firebase">Firebase Setup guide</Link>:
+        </p>
+        <CodeBlock
+          language="env"
+          filename=".env"
+          code={`VITE_FIREBASE_API_KEY=AIzaSyA_your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your-app.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_APP_ID=1:123456789012:web:abcdef`}
+        />
+      </section>
+
+      {/* 3. Mount AuthProvider */}
       <section id="step-2" className="rak-docs-section">
         <h2>2. Mount AuthProvider</h2>
         <p>
@@ -55,6 +76,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Callout>
       </section>
 
+      {/* 4. Render Forms */}
       <section id="step-3" className="rak-docs-section">
         <h2>3. Render Authentication Forms</h2>
         <p>
@@ -79,6 +101,7 @@ export function AuthPage() {
         />
       </section>
 
+      {/* 5. Read State with useAuth() */}
       <section id="step-4" className="rak-docs-section">
         <h2>4. Read State with useAuth()</h2>
         <p>
@@ -110,6 +133,7 @@ export function UserProfile() {
         />
       </section>
 
+      {/* 6. Guard Routes */}
       <section id="step-5" className="rak-docs-section">
         <h2>5. Guard Routes with ProtectedRoute</h2>
         <p>
@@ -130,6 +154,25 @@ export function App() {
   )
 }`}
         />
+      </section>
+
+      {/* 7. Notes */}
+      <section id="notes" className="rak-docs-section">
+        <h2>Notes</h2>
+        <Callout type="info" title="Zero Authentication Flickering">
+          <code>&lt;ProtectedRoute&gt;</code> coordinates with <code>loading</code> from <code>useAuth()</code>, preventing fallback login forms from flashing during browser refreshes while IndexedDB session tokens are validated.
+        </Callout>
+      </section>
+
+      {/* 8. Related */}
+      <section id="related" className="rak-docs-section">
+        <h2>Related</h2>
+        <ul>
+          <li><Link href="/docs/signup">signup() API</Link> — Direct headless registration method</li>
+          <li><Link href="/docs/login">login() API</Link> — Direct headless authentication method</li>
+          <li><Link href="/docs/use-auth">useAuth() Hook</Link> — Session state consumer hook documentation</li>
+          <li><Link href="/docs/protected-route">ProtectedRoute Guard</Link> — Advanced route guard configurations</li>
+        </ul>
       </section>
 
       <div className="rak-docs-pager">

@@ -52,12 +52,20 @@ export function ComponentsContent() {
   return (
     <article className="rak-docs-article">
       <header className="rak-docs-hero">
-        <span className="rak-section-badge">UI Library</span>
+        <span className="rak-docs-eyebrow">DOCUMENTATION / UI COMPONENTS</span>
         <h1>Component Playground</h1>
         <p className="rak-docs-lead">
           Inspect, test, and copy accessible UI building blocks built on centralized CSS tokens with zero third-party UI library overhead.
         </p>
       </header>
+
+      {/* 1. What it does */}
+      <section id="what-it-does" className="rak-docs-section">
+        <h2>What it does</h2>
+        <p>
+          Raj-AuthKit provides a zero-dependency, accessible UI system specifically designed for authentication workflows. Every component uses centralized design system CSS tokens (colors, spacing, shadows, radius) and requires no runtime CSS-in-JS or external component libraries.
+        </p>
+      </section>
 
       {/* Button Section */}
       <section id="button-playground" className="rak-docs-section">
@@ -371,6 +379,17 @@ export function AuthenticationModal() {
 }`}
           />
         </div>
+      </section>
+
+      {/* Related */}
+      <section id="related" className="rak-docs-section">
+        <h2>Related</h2>
+        <ul>
+          <li><Link href="/docs/quick-start">Quick Start</Link> — 5-step integration walkthrough</li>
+          <li><Link href="/docs/login">login() API</Link> — Headless sign-in service logic</li>
+          <li><Link href="/docs/signup">signup() API</Link> — Headless registration service logic</li>
+          <li><Link href="/docs/protected-route">ProtectedRoute Guard</Link> — Guarding application routes</li>
+        </ul>
       </section>
 
       <div className="rak-docs-pager">

@@ -3,50 +3,59 @@ import { Callout } from '../../../components/docs/Callout.jsx'
 import { Link } from '../../../router/index.jsx'
 
 export const signupHeadings = [
-  { id: 'purpose', title: 'Purpose & Overview' },
-  { id: 'method-signature', title: 'API Signature' },
-  { id: 'example', title: 'Implementation Example' },
-  { id: 'behavior', title: 'Lifecycle & Behavior' },
-  { id: 'error-codes', title: 'Error Codes & Diagnostics' },
-  { id: 'prebuilt-form', title: 'Prebuilt SignupForm' }
+  { id: 'what-it-does', title: 'What it does' },
+  { id: 'usage', title: 'Usage' },
+  { id: 'parameters', title: 'Parameters' },
+  { id: 'return-value', title: 'Return Value' },
+  { id: 'example', title: 'Example' },
+  { id: 'error-codes', title: 'Error Codes' },
+  { id: 'prebuilt-form', title: 'Prebuilt SignupForm' },
+  { id: 'notes', title: 'Notes' },
+  { id: 'related', title: 'Related' }
 ]
 
 export function SignupContent() {
   return (
     <article className="rak-docs-article">
       <header className="rak-docs-hero">
-        <span className="rak-section-badge">Authentication API</span>
+        <span className="rak-docs-eyebrow">DOCUMENTATION / AUTHENTICATION</span>
         <h1>signup()</h1>
         <p className="rak-docs-lead">
           Creates a new user account in Firebase Authentication using email and password credentials, initializing reactive state automatically.
         </p>
       </header>
 
-      {/* 1. Purpose */}
-      <section id="purpose" className="rak-docs-section">
-        <h2>Purpose & Overview</h2>
+      {/* 1. What it does */}
+      <section id="what-it-does" className="rak-docs-section">
+        <h2>What it does</h2>
         <p>
-          The <code>signup()</code> method provides a clean, headless bridge to the Firebase modular SDK. It securely submits new user registration credentials over TLS, provisions the user record in your Firebase project directory, and triggers an immediate token handshake.
+          The <code>signup()</code> method securely registers a new user in your Firebase project directory over TLS. It validates password length, provisions the user profile with a unique UID, and triggers an immediate token handshake that signs the user in without requiring a separate login step.
         </p>
-        <Callout type="info" title="Automatic Session Initialization">
-          Upon successful account creation, Firebase immediately signs the user in. You do not need to issue a secondary <code>login()</code> call.
-        </Callout>
       </section>
 
-      {/* 2. API Signature */}
-      <section id="method-signature" className="rak-docs-section">
-        <h2>API Signature</h2>
+      {/* 2. Usage */}
+      <section id="usage" className="rak-docs-section">
+        <h2>Usage</h2>
         <CodeBlock
-          language="typescript"
-          filename="src/auth/authService.js"
-          code={`signup(email: string, password: string): Promise<UserCredential>`}
+          language="javascript"
+          filename="handleRegistration.js"
+          code={`import { signup } from './auth/authService.js'
+
+const userCredential = await signup('newuser@example.com', 'SecureP@ssw0rd')
+console.log('Created user UID:', userCredential.user.uid)`}
         />
+      </section>
+
+      {/* 3. Parameters */}
+      <section id="parameters" className="rak-docs-section">
+        <h2>Parameters</h2>
         <div className="rak-table-wrapper">
           <table>
             <thead>
               <tr>
                 <th>Parameter</th>
                 <th>Type</th>
+                <th>Required</th>
                 <th>Description</th>
               </tr>
             </thead>
@@ -54,25 +63,35 @@ export function SignupContent() {
               <tr>
                 <td><code>email</code></td>
                 <td><code>string</code></td>
-                <td>Standard email format (e.g. <code>user@domain.com</code>).</td>
+                <td>Yes</td>
+                <td>Valid email address format (e.g. <code>user@example.com</code>).</td>
               </tr>
               <tr>
                 <td><code>password</code></td>
                 <td><code>string</code></td>
-                <td>Must meet Firebase minimum requirement of 6 characters.</td>
+                <td>Yes</td>
+                <td>Password string satisfying Firebase minimum requirement of 6 characters.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      {/* 3. Implementation Example */}
+      {/* 4. Return Value */}
+      <section id="return-value" className="rak-docs-section">
+        <h2>Return Value</h2>
+        <p>
+          Returns a <code>Promise&lt;UserCredential&gt;</code> that resolves with the provisioned Firebase user credential.
+        </p>
+      </section>
+
+      {/* 5. Example */}
       <section id="example" className="rak-docs-section">
-        <h2>Implementation Example</h2>
-        <p>Calling <code>signup()</code> directly inside a custom registration handler:</p>
+        <h2>Example</h2>
+        <p>A complete account registration handler with error mapping:</p>
         <CodeBlock
           language="javascript"
-          filename="handleRegistration.js"
+          filename="registerController.js"
           code={`import { signup } from './auth/authService.js'
 
 async function handleRegister(email, password) {
@@ -92,55 +111,40 @@ async function handleRegister(email, password) {
         />
       </section>
 
-      {/* 4. Behavior */}
-      <section id="behavior" className="rak-docs-section">
-        <h2>Lifecycle & Behavior</h2>
-        <ol>
-          <li>Client invokes <code>signup(email, password)</code>.</li>
-          <li>Firebase Authentication validates password length and checks directory for existing email.</li>
-          <li>New user profile is provisioned with a unique UID.</li>
-          <li>Firebase triggers <code>onAuthStateChanged</code>, hydrating <code>AuthContext</code> with the fresh user instance.</li>
-          <li>Any active <code>&lt;ProtectedRoute&gt;</code> views render protected application dashboards automatically.</li>
-        </ol>
-      </section>
-
-      {/* 5. Error Codes & Diagnostics */}
+      {/* 6. Error Codes */}
       <section id="error-codes" className="rak-docs-section">
-        <h2>Error Codes & Diagnostics</h2>
-        <p>
-          Errors thrown by <code>signup()</code> preserve native Firebase error properties for robust diagnostics:
-        </p>
+        <h2>Error Codes</h2>
         <div className="rak-table-wrapper">
           <table>
             <thead>
               <tr>
                 <th>Firebase Error Code</th>
-                <th>Recommended User Message</th>
+                <th>Cause & Recommended Action</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><code>auth/email-already-in-use</code></td>
-                <td>An account with this email address already exists.</td>
+                <td>An account with this email address already exists. Direct user to Login.</td>
               </tr>
               <tr>
                 <td><code>auth/invalid-email</code></td>
-                <td>Please enter a valid email address.</td>
+                <td>The email address string does not conform to standard format.</td>
               </tr>
               <tr>
                 <td><code>auth/weak-password</code></td>
-                <td>Password should be at least 6 characters.</td>
+                <td>Password does not meet the minimum requirement of 6 characters.</td>
               </tr>
               <tr>
                 <td><code>auth/network-request-failed</code></td>
-                <td>Network error. Please check your internet connection.</td>
+                <td>Client could not reach Firebase authentication servers.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      {/* 6. Prebuilt SignupForm */}
+      {/* 7. Prebuilt SignupForm */}
       <section id="prebuilt-form" className="rak-docs-section">
         <h2>Prebuilt SignupForm</h2>
         <p>
@@ -154,6 +158,25 @@ export function RegisterModal({ onSwitchToLogin }) {
   return <SignupForm onSwitchToLogin={onSwitchToLogin} />
 }`}
         />
+      </section>
+
+      {/* 8. Notes */}
+      <section id="notes" className="rak-docs-section">
+        <h2>Notes</h2>
+        <Callout type="info" title="Automatic Session Initialization">
+          Upon successful account creation, Firebase immediately signs the user in. You do not need to issue a secondary <code>login()</code> call.
+        </Callout>
+      </section>
+
+      {/* 9. Related */}
+      <section id="related" className="rak-docs-section">
+        <h2>Related</h2>
+        <ul>
+          <li><Link href="/docs/login">login()</Link> — Authenticate existing user accounts</li>
+          <li><Link href="/docs/logout">logout()</Link> — Terminate user sessions and clear tokens</li>
+          <li><Link href="/docs/use-auth">useAuth()</Link> — React hook for accessing reactive auth state</li>
+          <li><Link href="/docs/protected-route">ProtectedRoute</Link> — Guard private views against unauthenticated access</li>
+        </ul>
       </section>
 
       <div className="rak-docs-pager">
