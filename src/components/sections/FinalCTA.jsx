@@ -12,7 +12,7 @@ export function FinalCTA() {
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <a href="#playground" className="rak-btn rak-btn-primary" style={{ padding: '0.75rem 1.75rem', fontSize: '1rem' }}>
-              Get Started Now
+              Get Started
             </a>
             <a
               href="https://github.com/rajkishorock-arch/Raj-Authkit"

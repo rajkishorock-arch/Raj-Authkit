@@ -8,7 +8,7 @@ export function Hero() {
           <div className="rak-animate-slide-up">
             <span className="rak-section-badge">
               <span className="rak-trust-dot" aria-hidden="true" />
-              Open Source • Firebase Web SDK
+              OPEN SOURCE • FIREBASE
             </span>
           </div>
 
@@ -19,7 +19,7 @@ export function Hero() {
 
           {/* Subheadline */}
           <p className="rak-hero-subheadline rak-animate-slide-up rak-delay-2">
-            A modular Firebase authentication toolkit and accessible design system for modern React applications.
+            A modular Firebase authentication toolkit for modern React applications.
           </p>
 
           {/* Action Buttons */}

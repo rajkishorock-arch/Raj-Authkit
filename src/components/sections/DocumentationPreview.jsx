@@ -2,27 +2,33 @@ export function DocumentationPreview() {
   const docGuides = [
     {
       title: 'Installation',
-      desc: 'Set up React 18, Vite, and the Firebase JavaScript SDK in minutes.'
+      desc: 'Set up React 18, Vite, and the Firebase JavaScript SDK in minutes.',
+      href: '#dx'
     },
     {
       title: 'Firebase Setup',
-      desc: 'Configure environment variables using the provided .env.example template.'
+      desc: 'Configure environment variables using the provided .env.example template.',
+      href: '#dx'
     },
     {
       title: 'Quick Start',
-      desc: 'Wrap your app with <AuthProvider> and render forms or protected routes.'
+      desc: 'Wrap your app with <AuthProvider> and render forms or protected routes.',
+      href: '#playground'
     },
     {
       title: 'Authentication API',
-      desc: 'Execute signup(), login(), and logout() with full error code preservation.'
+      desc: 'Execute signup(), login(), and logout() with full error code preservation.',
+      href: '#architecture'
     },
     {
       title: 'useAuth Hook',
-      desc: 'Access { user, loading } state anywhere in your React component tree.'
+      desc: 'Access { user, loading } state anywhere in your React component tree.',
+      href: '#dx'
     },
     {
       title: 'ProtectedRoute Guard',
-      desc: 'Guard private application views with customizable unauthenticated fallbacks.'
+      desc: 'Guard private application views with customizable unauthenticated fallbacks.',
+      href: '#architecture'
     }
   ]
 
@@ -39,25 +45,25 @@ export function DocumentationPreview() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>
+        <div className="rak-doc-grid">
           {docGuides.map((guide, idx) => (
-            <div
+            <a
               key={idx}
-              style={{
-                backgroundColor: 'var(--rak-color-surface)',
-                border: '1px solid var(--rak-color-border-subtle)',
-                borderRadius: 'var(--rak-radius-lg)',
-                padding: '1.5rem',
-                boxShadow: 'var(--rak-shadow-sm)'
-              }}
+              href={guide.href}
+              className="rak-doc-card"
             >
-              <h3 style={{ fontSize: 'var(--rak-font-size-base)', fontWeight: 700, color: 'var(--rak-color-text)', marginBottom: '0.5rem' }}>
-                {guide.title}
-              </h3>
-              <p style={{ fontSize: 'var(--rak-font-size-sm)', color: 'var(--rak-color-text-muted)', lineHeight: 1.5 }}>
-                {guide.desc}
-              </p>
-            </div>
+              <div>
+                <h3 className="rak-doc-card-title">
+                  {guide.title}
+                </h3>
+                <p className="rak-doc-card-desc">
+                  {guide.desc}
+                </p>
+              </div>
+              <span className="rak-doc-card-arrow">
+                Explore Guide →
+              </span>
+            </a>
           ))}
         </div>
 
@@ -69,7 +75,7 @@ export function DocumentationPreview() {
             className="rak-btn rak-btn-secondary"
             style={{ padding: '0.625rem 1.5rem' }}
           >
-            Read Full Documentation on GitHub →
+            Read Documentation →
           </a>
         </div>
       </div>

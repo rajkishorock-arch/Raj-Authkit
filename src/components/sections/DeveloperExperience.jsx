@@ -32,7 +32,7 @@ export function App() {
 async function handleSignIn(email, password) {
   try {
     const userCredential = await login(email, password)
-    console.log('Logged in UID:', userCredential.user.uid)
+    // User session established with Firebase
   } catch (error) {
     console.error('Firebase error code:', error.code)
   }

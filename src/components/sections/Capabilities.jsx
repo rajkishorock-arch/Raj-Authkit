@@ -5,7 +5,7 @@ export function Capabilities() {
       title: 'Authentication',
       desc: 'Firebase authentication and session handling with clean signup, login, and sign-out service methods.',
       linkHref: '#playground',
-      linkText: 'Explore Auth →',
+      linkText: 'Explore →',
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
@@ -19,7 +19,7 @@ export function Capabilities() {
       title: 'UI Components',
       desc: 'Accessible, responsive authentication UI components including Buttons, Inputs, Password controls, and AuthCards.',
       linkHref: '#components',
-      linkText: 'Explore UI →',
+      linkText: 'Explore →',
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
@@ -30,10 +30,10 @@ export function Capabilities() {
     },
     {
       id: 'security',
-      title: 'Security & Guards',
-      desc: 'Reactive authentication state listeners and flicker-free ProtectedRoute components to guard private application views.',
+      title: 'Security',
+      desc: 'Authentication state and protected route handling with flicker-free route guards.',
       linkHref: '#architecture',
-      linkText: 'Explore Security →',
+      linkText: 'Explore →',
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
@@ -44,9 +44,9 @@ export function Capabilities() {
     {
       id: 'dx',
       title: 'Developer Experience',
-      desc: 'Modular, decoupled APIs allowing developers to use pure headless logic, custom styling tokens, or drop-in forms.',
+      desc: 'Modular APIs and customizable UI allowing headless auth logic or drop-in forms.',
       linkHref: '#dx',
-      linkText: 'Explore DX →',
+      linkText: 'Explore →',
       icon: (
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <polyline points="16 18 22 12 16 6" />
