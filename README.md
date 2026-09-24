@@ -6,11 +6,27 @@ Raj-AuthKit is an open-source project intended to become a reusable, lightweight
 Raj-AuthKit is designed to simplify user authentication and user profile management in React applications using Firebase Authentication and Firestore. It will eventually be distributed as a reusable package on npm and maintained as a public open-source repository on GitHub.
 
 ## Current Development Status
-- **Current Step:** Step 1 — Foundation
+- **Current Step:** Step 2 — Firebase Setup & Configuration
 - **Open Source:** Yes (MIT Licensed)
-- **Firebase Status:** Firebase Authentication is **not implemented yet** (scheduled for upcoming development steps).
+- **Firebase Status:** Firebase SDK installed and initialized via `src/firebase/config.js`. Firebase Authentication is **not implemented yet** (scheduled for upcoming development steps).
 - **npm Status:** The project is **not published to npm yet** (package publishing will happen in a future step).
 - The base project structure with React, Vite, and JavaScript is cleanly initialized.
+
+## Environment Variables Configuration
+
+Copy `.env.example` to `.env` and fill in your Firebase project credentials from the Firebase Console:
+
+```bash
+cp .env.example .env
+```
+
+Variables required:
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
 
 ## Technology Stack
 - **Framework:** React
@@ -65,7 +81,7 @@ Raj-AuthKit/
 ## Roadmap
 
 - [x] **Step 1: Project Foundation** (React + Vite setup, basic structure)
-- [ ] **Step 2: Firebase Setup & Configuration** (Firebase SDK setup, environment variables)
+- [x] **Step 2: Firebase Setup & Configuration** (Firebase SDK setup, environment variables)
 - [ ] **Step 3: Core Auth Context & Provider** (Auth state listener, context creation)
 - [ ] **Step 4: Email & Password Authentication** (Sign up, Sign in, Sign out)
 - [ ] **Step 5: Social Authentication** (Google sign-in provider)
