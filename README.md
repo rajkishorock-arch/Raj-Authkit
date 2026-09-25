@@ -20,11 +20,10 @@ Raj-AuthKit simplifies user authentication and session management in React appli
 
 ---
 
-## Current Status & npm Release Notice
+## Package Status
 
-> **Package Status:** Raj-AuthKit is currently at version **0.1.0** (Open Source Release Preparation).
-> The repository is prepared for npm distribution with dual library builds. In `package.json`, `"private": true` is retained until the official public registry release.
-> The package installation instructions below reflect the future npm workflow once published.
+Raj-AuthKit is published to the npm public registry at version **0.1.0**.
+Dual module builds (ESM + CommonJS) and standalone component styles are compiled and ready for React and Firebase applications.
 
 ---
 
@@ -66,7 +65,7 @@ Raj-AuthKit simplifies user authentication and session management in React appli
 
 ### 1. Installation
 
-When distributed via npm:
+Install `raj-authkit` and `firebase` from npm:
 
 ```bash
 npm install raj-authkit firebase

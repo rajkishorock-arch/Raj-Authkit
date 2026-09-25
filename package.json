@@ -1,8 +1,15 @@
 {
   "name": "raj-authkit",
-  "private": true,
   "version": "0.1.0",
   "description": "A lightweight, modular Firebase authentication toolkit for React applications.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rajkishorock-arch/Raj-Authkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rajkishorock-arch/Raj-Authkit/issues"
+  },
+  "homepage": "https://github.com/rajkishorock-arch/Raj-Authkit",
   "type": "module",
   "main": "./dist/raj-authkit.cjs",
   "module": "./dist/raj-authkit.js",
@@ -30,9 +37,10 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "firebase": "^12.19.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "firebase": "^10.0.0 || ^11.0.0 || ^12.0.0",
+    "raj-authkit": "^0.1.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
