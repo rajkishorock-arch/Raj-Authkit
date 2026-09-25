@@ -1,221 +1,288 @@
 # Raj-AuthKit
 
-Raj-AuthKit is an open-source project intended to become a reusable, lightweight Firebase authentication toolkit for React applications.
+A lightweight, modular Firebase authentication toolkit for React applications.
 
-## About Raj-AuthKit
-Raj-AuthKit is designed to simplify user authentication and user profile management in React applications using Firebase Authentication and Firestore. It will eventually be distributed as a reusable package on npm and maintained as a public open-source repository on GitHub.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![CI Status](https://img.shields.io/badge/CI-Passing-brightgreen.svg)](.github/workflows/ci.yml)
 
-## Current Development Status
-- **Current Step:** Step 8 — Package Architecture & Distribution Readiness
-- **Open Source:** Yes (MIT Licensed)
-- **Package Architecture:** Dual ESM (`dist/raj-authkit.js`) and CommonJS (`dist/raj-authkit.cjs`) library builds with standalone component stylesheet (`dist/style.css`).
-- **npm Status:** **Pending registry release** (package is marked `"private": true` until the dedicated npm publishing step). Do not attempt to install from the public npm registry yet.
-- **Library Build Command:** `npm run build:package`
-- **Website Build Command:** `npm run build`
+Raj-AuthKit simplifies user authentication and session management in React applications using Firebase Authentication. It is architected for dual usage: developers can either use the **headless authentication core** (`AuthProvider`, `useAuth`, `authService`) with complete UI freedom, or drop in **pre-built, accessible UI components** (`LoginForm`, `SignupForm`, `AuthCard`) styled with clean design tokens.
 
-## Environment Variables Configuration
+---
 
-Copy `.env.example` to `.env` and fill in your Firebase project credentials from the Firebase Console:
+## Key Features
 
-```bash
-cp .env.example .env
+- **Dual-Mode Architecture:** Use headless authentication hooks/services or drop in ready-made UI forms.
+- **Single Source of Truth:** Centralized `onAuthStateChanged` session listener distributed across the React component tree via `useAuth()`.
+- **Framework-Agnostic Route Guard:** Reusable `<ProtectedRoute>` component with anti-flicker loading states and customizable unauthenticated fallbacks.
+- **Accessible UI Components:** Keyboard-operable forms, password visibility toggles, loading indicators, and semantic alerts.
+- **Zero Bloat:** Built purely with React and the official Firebase SDK. No Tailwind, no bulky component frameworks, no runtime overhead.
+- **Dual Module Output:** Generates both ECMAScript Modules (ESM) and CommonJS (CJS) library bundles with isolated CSS (`raj-authkit/style.css`).
+
+---
+
+## Current Status & npm Release Notice
+
+> **Package Status:** Raj-AuthKit is currently at version **0.1.0** (Open Source Release Preparation).
+> The repository is prepared for npm distribution with dual library builds. In `package.json`, `"private": true` is retained until the official public registry release.
+> The package installation instructions below reflect the future npm workflow once published.
+
+---
+
+## Architecture Overview
+
+```text
+┌────────────────────────────────────────────────────────┐
+│               Firebase Authentication SDK              │
+└───────────────────────────┬────────────────────────────┘
+                            │
+            ┌───────────────▼───────────────┐
+            │     src/firebase/config.js    │
+            │  (initAuth / getFirebaseApp)  │
+            └───────────────┬───────────────┘
+                            │
+            ┌───────────────▼───────────────┐
+            │     src/auth/authService.js   │
+            │  (signup / login / logout)    │
+            └───────────────┬───────────────┘
+                            │
+            ┌───────────────▼───────────────┐
+            │   src/auth/AuthContext.jsx    │
+            │  (AuthProvider / onAuthState) │
+            └───────┬───────────────┬───────┘
+                    │               │
+        ┌───────────▼─────┐   ┌─────▼───────────┐
+        │  useAuth() Hook │   │  ProtectedRoute │
+        └───────────┬─────┘   └─────────────────┘
+                    │
+        ┌───────────▼───────────────────────────┐
+        │        UI Layer (Forms & Primitives)  │
+        │   LoginForm | SignupForm | AuthCard   │
+        └───────────────────────────────────────┘
 ```
 
-Variables required:
-- `VITE_FIREBASE_API_KEY`
-- `VITE_FIREBASE_AUTH_DOMAIN`
-- `VITE_FIREBASE_PROJECT_ID`
-- `VITE_FIREBASE_STORAGE_BUCKET`
-- `VITE_FIREBASE_MESSAGING_SENDER_ID`
-- `VITE_FIREBASE_APP_ID`
+---
 
-## Technology Stack
-- **Framework:** React
-- **Build Tool:** Vite
-- **Language:** JavaScript
-- **Package Manager:** npm
-
-## Installation
-
-Clone the repository and install the dependencies:
-
-```bash
-npm install
-```
-
-## Running Locally
-
-Start the Vite development server:
-
-```bash
-npm run dev
-```
-
-```bash
-npm run build
-```
-
-Build library package for distribution:
-
-```bash
-npm run build:package
-```
-
-## Package Usage (npm)
-
-> **Note:** The package is currently in preparation for npm distribution (`"private": true`) and has not yet been published to the registry. The examples below demonstrate how consumers will use the library once published.
+## Quick Start (Package Usage)
 
 ### 1. Installation
+
+When distributed via npm:
 
 ```bash
 npm install raj-authkit firebase
 ```
 
 #### Peer Dependencies
-Raj-AuthKit requires the following peer dependencies in the consumer project:
+Raj-AuthKit requires:
 - `react` (`>=18.0.0`)
 - `react-dom` (`>=18.0.0`)
 - `firebase` (`^10.0.0 || ^11.0.0 || ^12.0.0`)
 
-### 2. Import Styles (Optional for UI Components)
+### 2. Import Component Styles (Optional)
 
-If using the pre-built UI components, import the CSS stylesheet once at the entry point of your application:
+If using the pre-built UI components, import the stylesheet once at your app entry point:
 
 ```javascript
 import 'raj-authkit/style.css'
 ```
 
-### 3. Initialize Firebase & Wrap with AuthProvider
+*(If you only use the headless core, importing CSS is not required).*
 
-You can initialize Firebase by either:
-- Passing your config to `initAuth(config)`:
+### 3. Initialize Firebase & Mount AuthProvider
+
+Configure Firebase with your project credentials using either `initAuth(config)`:
 
 ```jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { initAuth, AuthProvider } from 'raj-authkit'
+import App from './App.jsx'
+import 'raj-authkit/style.css'
 
 initAuth({
   apiKey: "AIzaSy...",
   authDomain: "your-app.firebaseapp.com",
   projectId: "your-app",
   storageBucket: "your-app.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef"
+  messagingSenderId: "123456789012",
+  appId: "1:123456789012:web:abcdef"
 })
 
-export default function App() {
-  return (
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
     <AuthProvider>
-      <YourAppContent />
+      <App />
     </AuthProvider>
-  )
-}
+  </React.StrictMode>
+)
 ```
 
-- Or passing `config` directly to `<AuthProvider config={firebaseConfig}>`:
+Or pass `config` directly to `<AuthProvider config={firebaseConfig}>`.
 
-```jsx
-import { AuthProvider } from 'raj-authkit'
-
-export default function App() {
-  return (
-    <AuthProvider config={firebaseConfig}>
-      <YourAppContent />
-    </AuthProvider>
-  )
-}
-```
-
-### 4. Headless Auth Hook (`useAuth`)
+### 4. Consume Authentication State (`useAuth`)
 
 ```jsx
 import { useAuth } from 'raj-authkit'
 
-function UserProfile() {
+export function UserProfile() {
   const { user, loading } = useAuth()
 
-  if (loading) return <p>Loading session...</p>
-  if (!user) return <p>Please log in.</p>
+  if (loading) return <p>Checking session status...</p>
+  if (!user) return <p>Please sign in.</p>
 
-  return <p>Signed in as: {user.email}</p>
+  return <p>Signed in as: <strong>{user.email}</strong></p>
 }
 ```
 
-### 5. Pre-Built Authentication Forms
+### 5. Render Pre-Built Forms
 
 ```jsx
 import { LoginForm, SignupForm } from 'raj-authkit'
 
-function AuthPage() {
-  return (
+export function AuthPage() {
+  const [mode, setMode] = React.useState('login')
+
+  return mode === 'login' ? (
     <LoginForm
-      onSuccess={(userCredential) => console.log('Logged in:', userCredential.user.email)}
-      onSwitchToSignup={() => console.log('Navigate to signup')}
+      onSuccess={(userCredential) => console.log('Authenticated:', userCredential.user.email)}
+      onSwitchToSignup={() => setMode('signup')}
+    />
+  ) : (
+    <SignupForm
+      onSuccess={(userCredential) => console.log('Registered:', userCredential.user.email)}
+      onSwitchToLogin={() => setMode('login')}
     />
   )
 }
 ```
 
-### 6. Protected Route Guard
+### 6. Protect Private Routes (`ProtectedRoute`)
 
 ```jsx
 import { ProtectedRoute } from 'raj-authkit'
 
-function DashboardPage() {
+export function Dashboard() {
   return (
-    <ProtectedRoute fallback={<p>Access restricted. Please log in.</p>}>
-      <DashboardContent />
+    <ProtectedRoute fallback={<p>Access restricted. Please sign in.</p>}>
+      <div>
+        <h2>Protected Account Dashboard</h2>
+      </div>
     </ProtectedRoute>
   )
 }
 ```
 
-### 7. Public API Reference
+---
 
-| Category | Exports |
-| :--- | :--- |
-| **Core** | `AuthProvider`, `AuthContext`, `useAuth`, `authService`, `signup`, `login`, `logout`, `auth`, `initAuth`, `initFirebase` |
-| **Route Guard** | `ProtectedRoute` |
-| **Auth UI** | `LoginForm`, `SignupForm`, `AuthCard` |
-| **UI Primitives** | `Button`, `Input`, `PasswordInput`, `Alert`, `Spinner` |
-| **Utilities** | `getAuthErrorMessage` |
+## Public API Reference
+
+| Category | Exported Symbol | Description |
+| :--- | :--- | :--- |
+| **Core & Auth** | `AuthProvider` | Central React Context provider for authentication state |
+| | `AuthContext` | Underlying React Context instance (for custom hooks & testing) |
+| | `useAuth` | Custom hook returning `{ user, loading }` |
+| | `authService` | Object grouping `{ signup, login, logout, auth }` |
+| | `signup` | Direct function creating user account with email/password |
+| | `login` | Direct function signing in with email/password |
+| | `logout` | Direct function terminating current user session |
+| | `auth` | Active Firebase Auth instance (safe lazy proxy) |
+| **Configuration** | `initAuth` | Primary initialization helper for consumer Firebase config |
+| | `initFirebase` | Documented alias for `initAuth` |
+| | `getFirebaseApp` | Retrieves underlying `FirebaseApp` instance for companion SDKs |
+| **Route Security** | `ProtectedRoute` | Framework-agnostic route guard component |
+| **Auth UI** | `LoginForm` | Pre-built email/password login form |
+| | `SignupForm` | Pre-built email/password registration form |
+| | `AuthCard` | Card container layout for authentication screens |
+| **UI Primitives** | `Button` | Accessible button with loading states and variants |
+| | `Input` | Accessible text/email input with label & error display |
+| | `PasswordInput` | Accessible password field with visibility toggle |
+| | `Alert` | Accessible feedback alert with semantic SVG icons |
+| | `Spinner` | Lightweight CSS loading spinner primitive |
+| **Utilities** | `getAuthErrorMessage` | Maps Firebase error codes to user-friendly messages |
+
+---
+
+## Local Development & Repository Setup
+
+### Clone & Install
+```bash
+git clone https://github.com/rajkishorock-arch/Raj-Authkit.git
+cd Raj-Authkit
+npm install
+```
+
+### Configure Local Environment
+```bash
+cp .env.example .env
+```
+Fill in your Firebase development project credentials in `.env`.
+
+### Run Development Server
+```bash
+npm run dev
+```
+Open `http://localhost:3000` to browse the documentation website and live playground.
+
+### Build Commands
+```bash
+# Build the documentation website
+npm run build
+
+# Build the npm library package distribution
+npm run build:package
+```
+
+---
 
 ## Project Structure
 
-```
+```text
 Raj-AuthKit/
-│
+├── .github/
+│   ├── ISSUE_TEMPLATE/       # Bug report and feature request templates
+│   ├── workflows/ci.yml      # Automated GitHub Actions CI workflow
+│   └── pull_request_template.md
+├── dist/                     # Distribution output for package builds
+├── public/                   # Static assets for demo website
 ├── src/
-│   ├── components/      # UI components (buttons, forms, modals)
-│   ├── auth/            # Auth context, providers, and state
-│   ├── firebase/        # Firebase configuration and client init
-│   ├── hooks/           # Custom React hooks (e.g., useAuth)
-│   ├── utils/           # Helper functions and validators
-│   ├── App.jsx          # Root component
-│   ├── index.css        # Base styles
-│   └── main.jsx         # App entry point
-│
-├── public/              # Static assets
-├── .gitignore           # Git ignore rules
-├── package.json         # Project metadata and dependencies
-├── README.md            # Project documentation
-└── vite.config.js       # Vite configuration
+│   ├── auth/                 # AuthProvider, useAuth, authService
+│   ├── components/
+│   │   ├── auth/             # LoginForm, SignupForm, AuthCard, ProtectedRoute
+│   │   ├── docs/             # Documentation layout components
+│   │   ├── layout/           # Website navigation and header/footer
+│   │   ├── sections/         # Landing page and playground sections
+│   │   └── ui/               # Button, Input, PasswordInput, Alert, Spinner
+│   ├── firebase/             # Firebase configuration and initAuth
+│   ├── pages/                # Website and documentation route pages
+│   ├── router/               # Client-side router
+│   ├── styles/               # Design tokens, component styles, website styles
+│   ├── utils/                # Error handling utilities
+│   ├── index.js              # Public library package entry point
+│   ├── App.jsx               # Root website application component
+│   └── main.jsx              # Website entry point
+├── CHANGELOG.md              # Version release notes
+├── CONTRIBUTING.md           # Contribution guidelines
+├── CODE_OF_CONDUCT.md        # Community code of conduct
+├── LICENSE                   # MIT License
+├── README.md                 # Public project presentation
+├── SECURITY.md               # Vulnerability reporting policy
+├── package.json              # Package metadata and dependencies
+├── vite.config.js            # Website Vite configuration
+└── vite.config.lib.js        # Library package Vite configuration
 ```
 
-## Roadmap
+---
 
-- [x] **Step 1: Project Foundation** (React + Vite setup, basic structure)
-- [x] **Step 2: Firebase Setup & Configuration** (Firebase SDK setup, environment variables)
-- [x] **Step 3: Authentication Service Foundation** (signup, login, logout auth service)
-- [x] **Step 4: Core Auth Context & Provider** (Auth state listener, context, useAuth)
-- [x] **Step 5: Professional UI Foundation** (Button, Input, PasswordInput, Alert, Spinner, AuthCard)
-- [x] **Step 6: Email & Password Authentication UI** (Login & Signup forms, integration)
-- [x] **Step 7: Protected Routes & Auth Guard** (Framework-independent ProtectedRoute guard)
-- [ ] **Step 8: Social Authentication** (Google sign-in provider)
-- [ ] **Step 9: Password Management & Verification** (Password reset, email verification)
-- [ ] **Step 10: Firestore User Profile Integration** (User documents, roles)
-- [ ] **Step 11: Package Distribution** (Prepare and bundle for npm distribution)
+## Contributing & Community
+
+We welcome contributions from the community! Please review the following guides before contributing:
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Security Policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Changelog](CHANGELOG.md)
+
+---
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
